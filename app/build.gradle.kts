@@ -45,4 +45,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.google.dagger:hilt-android:2.51.1")
 }
