@@ -10,4 +10,13 @@
         android:name="com.example.mealmemoapp.ui.multiple_recipes.MultipleRecipesFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.mealmemoapp.ui.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" />
+    <fragment
+        android:id="@+id/emptyFridgeFragment"
+        android:name="com.example.mealmemoapp.ui.empty_fridge.EmptyFridgeFragment"
+        android:label="fragment_empty_fridge"
+        tools:layout="@layout/fragment_empty_fridge" />
 </navigation>

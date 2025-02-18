@@ -1,9 +1,9 @@
-package com.example.mealmemoapp.ui.multiple_recipes
+package com.example.mealmemoapp.ui.empty_fridge
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel@Inject constructor(): ViewModel() {
+class EmptyFridgeViewModel @Inject constructor(): ViewModel() {
 }

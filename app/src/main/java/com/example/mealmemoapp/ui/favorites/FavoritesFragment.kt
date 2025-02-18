@@ -1,9 +1,9 @@
-package com.example.mealmemoapp.ui.multiple_recipes
+package com.example.mealmemoapp.ui.favorites
 
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class EmptyFridgeFragment:Fragment() {
+class FavoritesFragment:Fragment() {
 }
