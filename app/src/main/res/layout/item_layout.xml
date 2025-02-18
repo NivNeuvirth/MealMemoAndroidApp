@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/default_image"
         android:id="@+id/itemImage"/>
 
     <LinearLayout
@@ -60,7 +60,7 @@
                     android:textColor="@color/white"
                     android:drawablePadding="8dp"
                     android:layout_weight="1"
-                    app:drawableStartCompat="@drawable/ic_launcher_background"
+                    app:drawableStartCompat="@drawable/schedule_24px"
                     app:drawableTint="@color/color_light_coral" />
 
                 <TextView
@@ -72,7 +72,7 @@
                     android:textSize="16sp"
                     android:drawablePadding="8dp"
                     android:layout_weight="1"
-                    app:drawableStartCompat="@drawable/ic_launcher_background"
+                    app:drawableStartCompat="@drawable/speed_24px"
                     app:drawableTint="@color/color_light_coral" />
 
                 <TextView
@@ -84,7 +84,7 @@
                     android:textSize="16sp"
                     android:drawablePadding="8dp"
                     android:layout_weight="1"
-                    app:drawableStartCompat="@drawable/ic_launcher_background"
+                    app:drawableStartCompat="@drawable/mode_heat_24px"
                     app:drawableTint="@color/color_light_coral" />
 
             </LinearLayout>

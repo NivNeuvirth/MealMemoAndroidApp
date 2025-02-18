@@ -1,4 +1,4 @@
-package com.example.mealmemoapp.ui
+package com.example.mealmemoapp.ui.multiple_recipes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -37,18 +37,21 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
             this.recipe = item
             binding.itemTitle.text = item.title
             binding.itemTime.text = item.readyInMinutes.toString()
-            binding.itemDiff.text = item.title
-            binding.itemCal.text = item.title
+            binding.itemDiff.text = item.readyInMinutes.toString()
+            binding.itemCal.text = item.readyInMinutes.toString()
             binding.itemDescription.text = item.title
 
-            if (item.image?.startsWith("content://") == true) {
-                Glide.with(binding.root).load(item.image).into(binding.itemImage)
-            } else {
-                val resourceId = binding.root.context.resources.getIdentifier(item.image, "drawable", binding.root.context.packageName)
-                if (resourceId != 0) {
-                    Glide.with(binding.root).load(resourceId).into(binding.itemImage)
-                }
-            }
+            Glide.with(binding.root.context)
+                .load(item.image)
+                .into(binding.itemImage)
+//            if (item.image?.startsWith("content://") == true) {
+//                Glide.with(binding.root).load(item.image).into(binding.itemImage)
+//            } else {
+//                val resourceId = binding.root.context.resources.getIdentifier(item.image, "drawable", binding.root.context.packageName)
+//                if (resourceId != 0) {
+//                    Glide.with(binding.root).load(resourceId).into(binding.itemImage)
+//                }
+//            }
         }
     }
 
