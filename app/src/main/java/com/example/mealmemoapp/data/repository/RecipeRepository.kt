@@ -1,6 +1,9 @@
 package com.example.mealmemoapp.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.mealmemoapp.data.local_database.RecipeDao
+import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.data.remote_database.RecipeRemoteDataSource
 import com.example.mealmemoapp.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -17,4 +20,33 @@ class RecipeRepository @Inject constructor(
         {remoteDataSource.getRecipe(id)},
         {localDataSource.addRecipe(it)}
     )
+
+    // Fetch multiple recipes
+    fun getRecipes(ids: List<Int>) = performFetchingAndSaving(
+        { localDataSource.getRecipes(ids) },
+        { remoteDataSource.getRecipes(ids) },
+        { localDataSource.addRecipes(it) }
+    )
+
+    fun getRecipeWithIngredients(id: Int) = performFetchingAndSaving(
+        { localDataSource.getRecipe(id) },
+        { remoteDataSource.getRecipe(id) },
+        { localDataSource.addRecipe(it) }
+    )
+
+    // New methods for favorites
+    fun getFavoriteRecipes(): LiveData<List<Recipe>> = localDataSource.getFavoriteRecipes()
+
+    suspend fun addToFavorites(recipe: Recipe) {
+        recipe.isFavorite = true
+        localDataSource.updateRecipe(recipe) // Save updated favorite status
+    }
+
+    suspend fun removeFromFavorites(recipe: Recipe) {
+        recipe.isFavorite = false
+        localDataSource.updateRecipe(recipe) // Save updated favorite status
+    }
+
+    suspend fun updateRecipe(recipe: Recipe) = localDataSource.updateRecipe(recipe)
+
 }

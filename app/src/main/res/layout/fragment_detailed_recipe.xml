@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.single_character.DetailedViewFragment"
+    tools:context=".ui.detailed_recipe.DetailedRecipeFragment"
     android:fitsSystemWindows="true"
     android:background="@color/color_light_coral">
 
@@ -48,7 +48,7 @@
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bottom_sheet_title"
+                android:text="bottom_sheet_title"
                 android:fontFamily="@font/ausa"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -60,37 +60,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/time_txt"
+                android:text="time_txt"
                 android:textColor="@color/color_dark_purple"
                 android:drawablePadding="5dp"
                 app:drawableStartCompat="@drawable/schedule_24px" />
 
             <TextView
-                android:id="@+id/difficulty_title"
+                android:id="@+id/servings_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/difficulty_txt"
+                android:text="servings_txt"
                 android:textColor="@color/color_dark_purple"
-                android:drawableStart="@drawable/speed_24px"
+                android:drawableStart="@drawable/restaurant_24px"
                 android:drawablePadding="5dp" />
 
             <TextView
-                android:id="@+id/calories_title"
+                android:id="@+id/score_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/calories_txt"
+                android:text="score_txt"
                 android:drawablePadding="5dp"
                 android:textColor="@color/color_dark_purple"
-                app:drawableStartCompat="@drawable/mode_heat_24px" />
+                app:drawableStartCompat="@drawable/stars_24px" />
 
             <TextView
                 android:id="@+id/description_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                android:text="@string/description_txt"
+                android:text="Description"
                 android:textSize="20sp"
                 android:fontFamily="@font/roboto_regular"
                 android:textStyle="bold"
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                android:text="ingredients_txt"
+                android:text="Ingredients"
                 android:textSize="18sp"
                 android:fontFamily="@font/roboto_regular"
                 android:textStyle="bold"

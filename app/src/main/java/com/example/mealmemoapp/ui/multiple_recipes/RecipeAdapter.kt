@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.databinding.ItemLayoutBinding
 
@@ -16,6 +17,7 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
 
     interface ItemListener{
         fun onItemClicked(index:Int)
+        fun onFavoriteClicked(recipe: Recipe)
     }
 
     inner class ItemViewHolder(private val binding : ItemLayoutBinding)
@@ -26,6 +28,9 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
 
         init {
             binding.root.setOnClickListener(this)
+            binding.favoriteButton.setOnClickListener{
+                callback.onFavoriteClicked(recipe)
+            }
         }
 
         override fun onClick(p0: View?) {
@@ -36,22 +41,18 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
 //            callback
             this.recipe = item
             binding.itemTitle.text = item.title
-            binding.itemTime.text = item.readyInMinutes.toString()
-            binding.itemDiff.text = item.readyInMinutes.toString()
-            binding.itemCal.text = item.readyInMinutes.toString()
-            binding.itemDescription.text = item.title
+            binding.itemTime.text = "${item.readyInMinutes} min"
+            binding.itemServings.text = item.servings.toString()
+            binding.itemScore.text = String.format("%.2f", item.spoonacularScore)
 
             Glide.with(binding.root.context)
                 .load(item.image)
                 .into(binding.itemImage)
-//            if (item.image?.startsWith("content://") == true) {
-//                Glide.with(binding.root).load(item.image).into(binding.itemImage)
-//            } else {
-//                val resourceId = binding.root.context.resources.getIdentifier(item.image, "drawable", binding.root.context.packageName)
-//                if (resourceId != 0) {
-//                    Glide.with(binding.root).load(resourceId).into(binding.itemImage)
-//                }
-//            }
+
+            // Set the favorite icon status based on isFavorite
+            binding.favoriteButton.setImageResource(
+                if (item.isFavorite) R.drawable.favorite_filled_24px else R.drawable.favorite_24px
+            )
         }
     }
 

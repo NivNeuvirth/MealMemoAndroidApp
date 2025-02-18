@@ -9,5 +9,26 @@
         android:id="@+id/homePageFragment"
         android:name="com.example.mealmemoapp.ui.multiple_recipes.MultipleRecipesFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailedRecipeFragment"
+        android:name="com.example.mealmemoapp.ui.detailed_recipe.DetailedRecipeFragment"
+        android:label="fragment_detailed_recipe"
+        tools:layout="@layout/fragment_detailed_recipe" />
+    <fragment
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.example.mealmemoapp.ui.favorite_recipes.FavoriteRecipesFragment"
+        android:label="fragment_favorite_recipes"
+        tools:layout="@layout/fragment_favorite_recipes" >
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+    </fragment>
 </navigation>
