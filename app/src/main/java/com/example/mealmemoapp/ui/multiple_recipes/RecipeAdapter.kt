@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
-import com.example.mealmemoapp.databinding.ItemLayoutBinding
+import com.example.mealmemoapp.databinding.RecipeLayoutBinding
 
 
 class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):RecyclerView.Adapter<RecipeAdapter.ItemViewHolder>() {
@@ -20,7 +20,7 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
         fun onFavoriteClicked(recipe: Recipe)
     }
 
-    inner class ItemViewHolder(private val binding : ItemLayoutBinding)
+    inner class ItemViewHolder(private val binding : RecipeLayoutBinding)
         :RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
 
@@ -59,7 +59,7 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
     fun itemAt(position:Int) = items[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=ItemViewHolder(
-        ItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        RecipeLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =
         holder.bind(items[position])

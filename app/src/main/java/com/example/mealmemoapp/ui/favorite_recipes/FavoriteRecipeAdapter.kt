@@ -10,7 +10,7 @@ import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.databinding.FragmentDetailedRecipeBinding
 import com.example.mealmemoapp.databinding.FragmentHomePageBinding
-import com.example.mealmemoapp.databinding.ItemLayoutBinding
+import com.example.mealmemoapp.databinding.RecipeLayoutBinding
 
 class FavoriteRecipeAdapter(
     private val onRecipeClick: (Recipe) -> Unit,
@@ -19,7 +19,7 @@ class FavoriteRecipeAdapter(
 ) : ListAdapter<Recipe, FavoriteRecipeAdapter.FavoriteViewHolder>(RecipeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RecipeLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(binding)
     }
 
@@ -28,7 +28,7 @@ class FavoriteRecipeAdapter(
         holder.bind(recipe)
     }
 
-    inner class FavoriteViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class FavoriteViewHolder(private val binding: RecipeLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.itemTitle.text = recipe.title
             binding.itemTime.text = "${recipe.readyInMinutes} min"

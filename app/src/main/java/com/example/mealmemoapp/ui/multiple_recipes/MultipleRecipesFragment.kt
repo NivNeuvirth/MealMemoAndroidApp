@@ -39,8 +39,8 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
         setupRecyclerView()
 
-        observeMultipleRecipesData(listOf(1))
-        //observeMultipleRecipesData(listOf(1, 2, 3))  // Example of fetching multiple recipes with IDs 1, 2, and 3
+        //observeMultipleRecipesData(listOf(1))
+        observeMultipleRecipesData(listOf(1, 2, 3))  // Example of fetching multiple recipes with IDs 1, 2, and 3
 
         // Add the navigation listener for navigating to the favorites screen
         binding.appTitle.setOnClickListener {

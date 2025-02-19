@@ -30,7 +30,7 @@ class AppModule {
     fun provideGson() : Gson = GsonBuilder().create()
 
     @Provides
-    fun provideCharacterService(retrofit: Retrofit) : RecipeService =
+    fun provideRecipeService(retrofit: Retrofit) : RecipeService =
         retrofit.create(RecipeService::class.java)
 
     @Provides
@@ -40,5 +40,5 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideCharacterDao(database: RecipeAppDataBase) = database.recipeDao()
+    fun provideRecipeDao(database: RecipeAppDataBase) = database.recipeDao()
 }
