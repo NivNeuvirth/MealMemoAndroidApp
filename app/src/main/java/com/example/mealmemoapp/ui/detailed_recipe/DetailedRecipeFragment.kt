@@ -3,28 +3,33 @@ package com.example.mealmemoapp.ui.detailed_recipe
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.databinding.FragmentDetailedRecipeBinding
+import com.example.mealmemoapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailedRecipeFragment : Fragment() {
 
-    private var _binding: FragmentDetailedRecipeBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDetailedRecipeBinding by autoCleared()
+    private val viewModel: DetailedRecipeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailedRecipeBinding.inflate(inflater, container, false)
+        binding = FragmentDetailedRecipeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,10 +63,17 @@ class DetailedRecipeFragment : Fragment() {
         Glide.with(requireContext())
             .load(recipe.image)
             .into(binding.itemImage)
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.fabEdit.setOnClickListener{
+            val recipeToEdit = viewModel.chosenItem.value
+
+            Log.d("DetailedRecipeFragment", "Recipe to Edit: $recipeToEdit") // Debugging
+
+            val bundle = Bundle().apply {
+                putParcelable("recipe_to_add_or_edit", recipeToEdit)
+            }
+
+            findNavController().navigate(R.id.action_detailedRecipeFragment_to_addOrEditRecipeFragment, bundle)
+        }
     }
 }

@@ -15,13 +15,13 @@ import com.example.mealmemoapp.databinding.FragmentHomePageBinding
 import com.example.mealmemoapp.utils.Loading
 import com.example.mealmemoapp.utils.Success
 import com.example.mealmemoapp.utils.Error
+import com.example.mealmemoapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
-    private var _binding: FragmentHomePageBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentHomePageBinding by autoCleared()
 
     private val viewModel: MultipleRecipesViewModel by viewModels()
     private lateinit var adapter: RecipeAdapter
@@ -30,7 +30,7 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomePageBinding.inflate(inflater, container, false)
+        binding = FragmentHomePageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,6 +41,7 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
         //observeMultipleRecipesData(listOf(1))
         observeMultipleRecipesData(listOf(1, 2, 3))  // Example of fetching multiple recipes with IDs 1, 2, and 3
+        //observeMultipleRecipesData(listOf(4))  // Example of fetching multiple recipes with IDs 1, 2, and 3
 
         // Add the navigation listener for navigating to the favorites screen
         binding.appTitle.setOnClickListener {
@@ -55,7 +56,8 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
     }
 
     private fun observeMultipleRecipesData(ids: List<Int>) {
-        viewModel.getMultipleRecipes(ids).observe(viewLifecycleOwner) { resource ->
+        viewModel.getMultipleRecipes(ids) // Trigger the data fetch
+        viewModel.recipes.observe(viewLifecycleOwner) { resource ->
             when (resource.status) {
                 is Success -> {
                     val recipes = resource.status.data
@@ -74,6 +76,7 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         }
     }
 
+
     override fun onItemClicked(index: Int) {
         val recipe = adapter.itemAt(index)  // Get the clicked recipe
         val bundle = Bundle().apply {
@@ -82,13 +85,8 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         findNavController().navigate(R.id.action_homePageFragment_to_detailedRecipeFragment, bundle)
     }
 
-    // Handle the favorite click
+//     Handle the favorite click
     override fun onFavoriteClicked(recipe: Recipe) {
         viewModel.updateFavoriteStatus(recipe)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

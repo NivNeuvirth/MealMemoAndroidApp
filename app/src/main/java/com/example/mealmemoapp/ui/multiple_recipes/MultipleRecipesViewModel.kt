@@ -18,10 +18,19 @@ class MultipleRecipesViewModel @Inject constructor(
     private val recipeRepository: RecipeRepository
 ) : ViewModel() {
 
-    // Fetch multiple recipes by a list of IDs
-    fun getMultipleRecipes(ids: List<Int>): LiveData<Resource<List<Recipe>>> {
-        return recipeRepository.getRecipes(ids)
+    private val _recipes = MutableLiveData<Resource<List<Recipe>>>()
+    val recipes: LiveData<Resource<List<Recipe>>> = _recipes
+
+    fun getMultipleRecipes(ids: List<Int>) {
+        recipeRepository.getRecipes(ids).observeForever { resource ->
+            _recipes.value = resource
+        }
     }
+
+//    // Fetch multiple recipes by a list of IDs
+//    fun getMultipleRecipes(ids: List<Int>): LiveData<Resource<List<Recipe>>> {
+//        return recipeRepository.getRecipes(ids)
+//    }
 
     private val _ingredients = MutableLiveData<List<String>>()
     val ingredients: LiveData<List<String>> get() = _ingredients

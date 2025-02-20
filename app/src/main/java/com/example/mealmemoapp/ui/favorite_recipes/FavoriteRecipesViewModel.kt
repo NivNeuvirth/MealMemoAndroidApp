@@ -3,6 +3,7 @@ package com.example.mealmemoapp.ui.favorite_recipes
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mealmemoapp.data.local_database.RecipeAppDataBase
@@ -31,6 +32,23 @@ class FavoriteRecipesViewModel @Inject constructor(
     fun removeFavorite(recipe: Recipe) {
         viewModelScope.launch {
             repository.removeFromFavorites(recipe)
+        }
+    }
+
+    fun updateRecipe(recipe: Recipe) {
+        viewModelScope.launch {
+            repository.updateRecipe(recipe)
+        }
+    }
+
+    // Update the favorite status of the recipe
+    fun updateFavoriteStatus(recipe: Recipe) {
+        viewModelScope.launch {
+            // Toggle the favorite status
+            val updatedRecipe = recipe.copy(isFavorite = !recipe.isFavorite)
+
+            // Update in the repository (update locally or remotely as needed)
+            repository.updateRecipe(updatedRecipe)  // Assuming you have a method in your repository
         }
     }
 }

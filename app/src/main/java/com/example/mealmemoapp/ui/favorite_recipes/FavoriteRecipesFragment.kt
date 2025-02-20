@@ -29,8 +29,11 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes) {
 
         favoriteRecipesAdapter = FavoriteRecipeAdapter(
             onRecipeClick = { recipe ->
+                val bundle = Bundle().apply {
+                    putParcelable("recipe", recipe)
+                }
                 // Handle recipe click, navigate to detailed recipe
-                findNavController().navigate(R.id.action_favoriteRecipesFragment_to_detailedRecipeFragment)
+                findNavController().navigate(R.id.action_favoriteRecipesFragment_to_detailedRecipeFragment, bundle)
             },
             onFavoriteClick = { recipe ->
                 favoriteRecipesViewModel.addFavorite(recipe)  // This will add to favorites
@@ -48,6 +51,10 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes) {
         favoriteRecipesViewModel.favoriteRecipes.observe(viewLifecycleOwner, Observer { recipes ->
             favoriteRecipesAdapter.submitList(recipes)
         })
+
+        binding.addBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_favoriteRecipesFragment_to_addOrEditRecipeFragment)
+        }
     }
 }
 

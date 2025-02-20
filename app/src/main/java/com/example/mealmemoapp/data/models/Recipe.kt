@@ -12,7 +12,8 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "recipes")
 @TypeConverters(IngredientTypeConverter::class)
 data class Recipe (
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     val image: String,
     val title: String,
     val readyInMinutes: Int,

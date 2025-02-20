@@ -1,6 +1,7 @@
 package com.example.mealmemoapp.ui.detailed_recipe
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.data.repository.RecipeRepository
@@ -17,4 +18,7 @@ class DetailedRecipeViewModel @Inject constructor(
     fun getRecipe(id: Int): LiveData<Resource<Recipe>> {
         return recipeRepository.getRecipe(id)
     }
+
+    private val _chosenItem = MutableLiveData<Recipe>()
+    val chosenItem : LiveData<Recipe> get() = _chosenItem
 }

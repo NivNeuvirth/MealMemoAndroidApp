@@ -45,4 +45,10 @@ interface RecipeDao {
 
     @Update
     suspend fun updateRecipe(recipe: Recipe)
+
+    @Query("SELECT * FROM recipes WHERE id = :id")
+    fun getRecipeSync(id: Int): Recipe?
+
+    @Query("SELECT * FROM recipes WHERE id IN (:ids)")
+    fun getRecipesSync(ids: List<Int>): List<Recipe>
 }

@@ -18,20 +18,23 @@ class RecipeRepository @Inject constructor(
     fun getRecipe(id:Int) = performFetchingAndSaving(
         {localDataSource.getRecipe(id)},
         {remoteDataSource.getRecipe(id)},
-        {localDataSource.addRecipe(it)}
+        {localDataSource.addRecipe(it)},
+        shouldFetch = { localDataSource.getRecipeSync(id) == null } // Check if local data exists
     )
 
     // Fetch multiple recipes
     fun getRecipes(ids: List<Int>) = performFetchingAndSaving(
         { localDataSource.getRecipes(ids) },
         { remoteDataSource.getRecipes(ids) },
-        { localDataSource.addRecipes(it) }
+        { localDataSource.addRecipes(it) },
+        shouldFetch = { localDataSource.getRecipesSync(ids).isEmpty() } // Avoid fetching if already cached
     )
 
     fun getRecipeWithIngredients(id: Int) = performFetchingAndSaving(
         { localDataSource.getRecipe(id) },
         { remoteDataSource.getRecipe(id) },
-        { localDataSource.addRecipe(it) }
+        { localDataSource.addRecipe(it) },
+        shouldFetch = { localDataSource.getRecipeSync(id) == null }
     )
 
     // New methods for favorites
@@ -39,7 +42,7 @@ class RecipeRepository @Inject constructor(
 
     suspend fun addToFavorites(recipe: Recipe) {
         recipe.isFavorite = true
-        localDataSource.updateRecipe(recipe) // Save updated favorite status
+        localDataSource.addFavoriteRecipe(recipe) // Save updated favorite status
     }
 
     suspend fun removeFromFavorites(recipe: Recipe) {

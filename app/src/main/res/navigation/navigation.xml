@@ -21,7 +21,11 @@
         android:id="@+id/detailedRecipeFragment"
         android:name="com.example.mealmemoapp.ui.detailed_recipe.DetailedRecipeFragment"
         android:label="fragment_detailed_recipe"
-        tools:layout="@layout/fragment_detailed_recipe" />
+        tools:layout="@layout/fragment_detailed_recipe" >
+        <action
+            android:id="@+id/action_detailedRecipeFragment_to_addOrEditRecipeFragment"
+            app:destination="@id/addOrEditRecipeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
         android:name="com.example.mealmemoapp.ui.favorite_recipes.FavoriteRecipesFragment"
@@ -30,5 +34,20 @@
         <action
             android:id="@+id/action_favoriteRecipesFragment_to_detailedRecipeFragment"
             app:destination="@id/detailedRecipeFragment" />
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_addOrEditRecipeFragment"
+            app:destination="@id/addOrEditRecipeFragment" />
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrEditRecipeFragment"
+        android:name="com.example.mealmemoapp.ui.add_or_edit_recipe.AddOrEditRecipeFragment"
+        android:label="fragment_add_or_edit_recipe"
+        tools:layout="@layout/fragment_add_or_edit_recipe" >
+        <action
+            android:id="@+id/action_addOrEditRecipeFragment_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
     </fragment>
 </navigation>
