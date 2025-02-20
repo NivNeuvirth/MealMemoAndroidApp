@@ -7,10 +7,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.mealmemoapp.R
+import com.example.mealmemoapp.data.remote_database.PlacesApiService
 import com.example.mealmemoapp.databinding.FragmentHomePageBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.GoogleMap
@@ -23,13 +29,25 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.mapsplatform.transportation.consumer.model.Location
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
     private lateinit var map:GoogleMap
-    private lateinit var client:FusedLocationProviderClient
+    @Inject
+    lateinit var placesApi: PlacesApiService
+
+
     private var _binding: FragmentStoresNearbyLayoutBinding? = null
     private val binding get() = _binding!!
+
+    private val permissionLauncher=registerForActivityResult(ActivityResultContracts.RequestPermission())
+    {
+        isGranted: Boolean->
+        if (isGranted) getUserLocation()
+        else Toast.makeText(requireContext(),"Location permission required",Toast.LENGTH_SHORT).show()
+    }
 
 
     override fun onCreateView(
@@ -46,7 +64,6 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
         val mapFragment=childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        client=LocationServices.getFusedLocationProviderClient(requireContext())
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -57,36 +74,43 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
     private fun getUserLocation(){
         if(ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.ACCESS_FINE_LOCATION)
             !=PackageManager.PERMISSION_GRANTED){
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+            permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             return
         }
-        client.lastLocation.addOnSuccessListener {
-            location:Location?->location?.let{
-                val userLocaction=LatLng(it.latitude,it.longitude)
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocaction,14f))
-                searchNearbyStores(userLocaction)
-
-        }
-        }
     }
-    private fun searchNearbyStores(location:LatLng){
-        val url="https://maps.googleapis.com/maps/api/place/nearbysearch/json" +
-                "?location=${location.latitude},${location.longitude}" +
-                "&radius=10000" + // Search within 10km
-                "&type=supermarket" + // Type: Grocery or supermarket
-                "&key=AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI"
 
-        val request=JsonObjectRequest(Request.Method.GET,url,null,{
-            response-> val results=response.getJSONArray("results")
-            for (i in 0 until results.length()){
-                val place=results.getJSONObject(i)
-                val name=place.getString("name")
-                val lat=place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
-                val lng=place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
-                val marker=LatLng(lat,lng)
-                map.addMarker(MarkerOptions().position(marker).title(name))
-            },
-            {error-> Log.e("MapFragment","Error fetching places:$error")})
+    val fusedLocationClient=LocationServices.getFusedLocationProviderClient(requireContext())
+    fusedLocationClient.lastLocation.addOnSuccessListener{location:Location?
+        ->location?.let{
+            val userLandmark=LatLng(it.latitude,it.longitude)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLandmark,14f))
+            searchNearbyStores(userLandmark)
+        }
+
+    }
+
+    private fun searchNearbyStores(location:LatLng){
+        val apiKey=getString(R.string.google_maps_key)
+        val locationString="${location.latitude},${location.latitude}"
+
+        lifecycleScope.launch {
+            try {
+                val response=placesApi.getNearbyPlaces(locationString,10000,"food",apiKey)
+                if (response.isSuccessful){
+                    response.body()?.let {
+                         placesResponse ->for (place in placesResponse.results) {
+                        val marker =
+                            LatLng(place.geometry.location.lat, place.geometry.location.lng)
+                        map.addMarker(MarkerOptions().position(marker).title(place.name))
+                    }
+                    }
+                }
+                else Log.e("MapFragment","API Error:${response.errorBody()?.string()}")
+            }
+            catch (e:Exception) {
+                Log.e("MapFragment", "Network request failed", e)
+
+            }
         }
     }
 }
