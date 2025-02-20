@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,13 @@
         android:name=".MyRecipeApp"
         tools:targetApi="31"
         tools:ignore="Instantiatable">
+        <service
+            android:name="MyNavigationServie"
+            android:foregroundServiceType="location">
+
+        </service>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI"/>

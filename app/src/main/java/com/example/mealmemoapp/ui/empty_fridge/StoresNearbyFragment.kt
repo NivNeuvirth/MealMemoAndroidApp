@@ -3,11 +3,14 @@ package com.example.mealmemoapp.ui.empty_fridge
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.mealmemoapp.databinding.FragmentHomePageBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.GoogleMap
@@ -18,6 +21,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.mapsplatform.transportation.consumer.model.Location
 
 
@@ -59,8 +63,8 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
         client.lastLocation.addOnSuccessListener {
             location:Location?->location?.let{
                 val userLocaction=LatLng(it.latitude,it.longitude)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocaction,14f))
-            searchNearbyStores(userLocaction)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocaction,14f))
+                searchNearbyStores(userLocaction)
 
         }
         }
@@ -70,6 +74,19 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
                 "?location=${location.latitude},${location.longitude}" +
                 "&radius=10000" + // Search within 10km
                 "&type=supermarket" + // Type: Grocery or supermarket
-                "&key=YOUR_API_KEY"
+                "&key=AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI"
+
+        val request=JsonObjectRequest(Request.Method.GET,url,null,{
+            response-> val results=response.getJSONArray("results")
+            for (i in 0 until results.length()){
+                val place=results.getJSONObject(i)
+                val name=place.getString("name")
+                val lat=place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
+                val lng=place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
+                val marker=LatLng(lat,lng)
+                map.addMarker(MarkerOptions().position(marker).title(name))
+            },
+            {error-> Log.e("MapFragment","Error fetching places:$error")})
+        }
     }
 }
