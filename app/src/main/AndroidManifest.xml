@@ -16,6 +16,9 @@
         android:name=".MyRecipeApp"
         tools:targetApi="31"
         tools:ignore="Instantiatable">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

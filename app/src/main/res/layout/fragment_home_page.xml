@@ -31,23 +31,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/app_title"
-        android:background="@color/white"
-      />
->
+        android:background="@color/white">
+
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/search_btn"
+            android:id="@+id/favorites_btn"
             android:layout_marginHorizontal="5dp"
             android:src="@drawable/chef_hat_heart_svgrepo_com"
             android:tint="@color/color_dark_purple"
-            android:backgroundTint="@color/color_light_purple"
-            />
+            android:backgroundTint="@color/color_light_purple" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/favorites_btn"
+            android:id="@+id/generateRecipe_btn"
             android:layout_marginHorizontal="5dp"
             android:src="@drawable/fridge_svgrepo_com"
             android:tint="@color/color_dark_purple"
@@ -56,11 +55,12 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/generateRecipe_btn"
+            android:id="@+id/storesNearby_btn"
             android:layout_marginHorizontal="5dp"
             android:src="@drawable/cart_3_svgrepo_com"
             android:tint="@color/color_dark_purple"
             android:backgroundTint="@color/color_light_purple"/>
+
 
 
     </androidx.appcompat.widget.Toolbar>
