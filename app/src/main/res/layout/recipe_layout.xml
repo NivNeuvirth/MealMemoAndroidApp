@@ -4,7 +4,8 @@
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:id="@+id/recycler_horizontal">
 
     <ImageView
         android:layout_width="match_parent"

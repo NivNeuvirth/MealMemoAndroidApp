@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.mediation.test.suite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,6 +60,9 @@ dependencies {
 //    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
 //    ksp("com.google.dagger.hilt-android-compiler:2.38.1")
 //    ksp("androidx.hilt:hilt-compiler:1.2.0")
+
+    //Recycler
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
