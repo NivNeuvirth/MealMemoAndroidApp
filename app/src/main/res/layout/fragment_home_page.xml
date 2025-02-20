@@ -6,22 +6,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.multiple_recipes.MultipleRecipesFragment"
     android:fitsSystemWindows="true"
-    android:background="@color/color_light_coral">
+    android:background="@drawable/homepageBackgroung">
 
     <TextView
+        android:id="@+id/app_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_title"
-        android:text="Explore"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
         android:fontFamily="@font/ausa"
-        android:layout_marginTop="10dp"
+        android:text="MealMemo"
+        android:textAlignment="center"
+        android:textColor="@color/color_dark_purple"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/color_dark_purple"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/app_title"
+        android:background="@color/white"
+>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/search_btn"
+            android:layout_marginHorizontal="5dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/favorites_btn"
+            android:layout_marginHorizontal="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/generateRecipe_btn"
+            android:layout_marginHorizontal="5dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/storesNearby_btn"
+            android:layout_marginHorizontal="5dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
@@ -29,20 +63,19 @@
         android:layout_height="wrap_content"
         android:queryHint="Search Recipe"
         android:iconifiedByDefault="false"
-        app:layout_constraintTop_toBottomOf="@id/app_title"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColorHint="@color/color_light_pink"
         android:textColor="@color/color_dark_purple"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+        android:id="@+id/recycler_main_Vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/color_light_coral"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
