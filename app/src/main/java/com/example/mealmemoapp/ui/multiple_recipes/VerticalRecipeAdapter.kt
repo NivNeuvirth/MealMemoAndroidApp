@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mealmemoapp.data.models.Category
-import com.example.mealmemoapp.data.models.RecipeCategory
 import com.example.mealmemoapp.databinding.VerticleRecipeLayoutBinding
-import com.example.mealmemoapp.databinding.RecipeLayoutBinding
 
 class VerticalRecipeAdapter(
     private val context: Context,
@@ -23,9 +21,9 @@ class VerticalRecipeAdapter(
             binding.categoryTitle.text = category.categoryName
 
             // Setup Horizontal RecyclerView
-            binding.recyclerHorizontal
+            binding.recyclerVertical.layoutManager=
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.recycler_horizontal.adapter = HorizontalRecipeAdapter(category.recipes, callback)
+            binding.recyclerVertical.adapter = HorizontalRecipeAdapter(category.recipes, callback)
         }
     }
 
