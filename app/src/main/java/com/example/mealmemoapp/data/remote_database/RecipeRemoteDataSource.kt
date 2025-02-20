@@ -1,6 +1,7 @@
 package com.example.mealmemoapp.data.remote_database
 
 import com.example.mealmemoapp.data.models.Recipe
+import com.example.mealmemoapp.data.models.RecipeResponse
 import retrofit2.Response
 import javax.inject.Inject
 

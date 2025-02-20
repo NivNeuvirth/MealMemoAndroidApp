@@ -21,6 +21,42 @@ class MultipleRecipesViewModel @Inject constructor(
     private val _recipes = MutableLiveData<Resource<List<Recipe>>>()
     val recipes: LiveData<Resource<List<Recipe>>> = _recipes
 
+    private var isDataFetched = false  // Flag to track if data is already fetched
+
+    fun getRandomRecipes(forceRefresh: Boolean = false) {
+        // If forceRefresh is false and the data has already been fetched, do not fetch again
+        if (!forceRefresh && isDataFetched) {
+            return
+        }
+
+        // Set loading state before starting to fetch
+        _recipes.postValue(Resource.loading(null))
+
+        // Fetch data from the repository
+        viewModelScope.launch {
+            try {
+                // Generate new random IDs for fetching recipes
+                val randomIds = (600000..700000).shuffled().take(1)
+
+                // Fetch the recipes by IDs
+                val response = recipeRepository.getRecipes(randomIds)
+
+                // Observe the response
+                response.observeForever { resource ->
+                    _recipes.value = resource
+
+                    // Mark data as fetched
+                    if (true) {
+                        isDataFetched = true
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle the error if fetching fails
+                _recipes.postValue(Resource.error("Failed to fetch recipes", null))
+            }
+        }
+    }
+
     fun getMultipleRecipes(ids: List<Int>) {
         recipeRepository.getRecipes(ids).observeForever { resource ->
             _recipes.value = resource

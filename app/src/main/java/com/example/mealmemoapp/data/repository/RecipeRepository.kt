@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.mealmemoapp.data.local_database.RecipeDao
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.data.remote_database.RecipeRemoteDataSource
+import com.example.mealmemoapp.utils.Resource
 import com.example.mealmemoapp.utils.performFetchingAndSaving
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -37,6 +38,7 @@ class RecipeRepository @Inject constructor(
         shouldFetch = { localDataSource.getRecipeSync(id) == null }
     )
 
+
     // New methods for favorites
     fun getFavoriteRecipes(): LiveData<List<Recipe>> = localDataSource.getFavoriteRecipes()
 
@@ -51,5 +53,4 @@ class RecipeRepository @Inject constructor(
     }
 
     suspend fun updateRecipe(recipe: Recipe) = localDataSource.updateRecipe(recipe)
-
 }

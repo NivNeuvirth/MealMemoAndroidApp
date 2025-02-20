@@ -1,6 +1,7 @@
 package com.example.mealmemoapp.data.remote_database
 
 import com.example.mealmemoapp.data.models.Recipe
+import com.example.mealmemoapp.data.models.RecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,7 +18,7 @@ interface RecipeService {
         @Query("type") type: String,  // Category (e.g., "main course", "dessert")
         @Query("number") number: Int, // Number of recipes to fetch
         @Query("apiKey") apiKey: String = API_KEY
-    ): Response<Recipe>
+    ): Response<RecipeResponse>
 
     companion object {
         private const val API_KEY = "56fddadda1b54080beddacc520a22753" // Replace with your actual Spoonacular API key
