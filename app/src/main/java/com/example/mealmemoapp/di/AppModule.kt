@@ -13,6 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +22,7 @@ class AppModule {
 
     @Provides
     @Singleton
+    @Named("RecipeApi")
     fun provideRetrofit(gson: Gson) : Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
@@ -30,7 +32,7 @@ class AppModule {
     fun provideGson() : Gson = GsonBuilder().create()
 
     @Provides
-    fun provideRecipeService(retrofit: Retrofit) : RecipeService =
+    fun provideRecipeService(@Named("RecipeApi") retrofit: Retrofit) : RecipeService =
         retrofit.create(RecipeService::class.java)
 
     @Provides

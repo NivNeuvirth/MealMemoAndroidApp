@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.mealmemoapp.data.models.Recipe
 
-@Database(entities = [Recipe::class], version = 5, exportSchema = false)
+@Database(entities = [Recipe::class], version = 6, exportSchema = false)
 @TypeConverters(IngredientTypeConverter::class)
 abstract class RecipeAppDataBase : RoomDatabase() {
 

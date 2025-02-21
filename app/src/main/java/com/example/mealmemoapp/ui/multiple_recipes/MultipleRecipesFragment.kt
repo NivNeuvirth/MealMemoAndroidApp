@@ -173,6 +173,10 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         binding.favoritesBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homePageFragment_to_favoriteRecipesFragment)
         }
+
+        binding.storesNearbyBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_homePageFragment_to_storesNearbyFragment)
+        }
     }
 
     private fun setupRecyclerView() {

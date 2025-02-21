@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_favoriteRecipesFragment"
             app:destination="@id/favoriteRecipesFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_storesNearbyFragment"
+            app:destination="@id/storesNearbyFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailedRecipeFragment"
@@ -50,4 +53,9 @@
             android:id="@+id/action_addOrEditRecipeFragment_to_favoriteRecipesFragment"
             app:destination="@id/favoriteRecipesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/storesNearbyFragment"
+        android:name="com.example.mealmemoapp.ui.empty_fridge.StoresNearbyFragment"
+        android:label="fragment_stores_nearby_layout"
+        tools:layout="@layout/fragment_stores_nearby_layout" />
 </navigation>
