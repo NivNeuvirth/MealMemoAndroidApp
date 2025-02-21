@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_storesNearbyFragment"
             app:destination="@id/storesNearbyFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_getRecipeByIngredients"
+            app:destination="@id/getRecipeByIngredients" />
     </fragment>
     <fragment
         android:id="@+id/detailedRecipeFragment"
@@ -58,4 +61,12 @@
         android:name="com.example.mealmemoapp.ui.empty_fridge.StoresNearbyFragment"
         android:label="fragment_stores_nearby_layout"
         tools:layout="@layout/fragment_stores_nearby_layout" />
+    <fragment
+        android:id="@+id/getRecipeByIngredients"
+        android:name="com.example.mealmemoapp.ui.by_ingredients_recipe.GetRecipeByIngredientsFragment"
+        android:label="GetRecipeByIngredients" >
+        <action
+            android:id="@+id/action_getRecipeByIngredients_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+    </fragment>
 </navigation>

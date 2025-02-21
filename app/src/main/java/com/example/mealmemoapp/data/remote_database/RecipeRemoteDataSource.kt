@@ -1,6 +1,7 @@
 package com.example.mealmemoapp.data.remote_database
 
 import com.example.mealmemoapp.data.models.Recipe
+import com.example.mealmemoapp.data.models.RecipeIdSummary
 import com.example.mealmemoapp.data.models.RecipeResponse
 import retrofit2.Response
 import javax.inject.Inject
@@ -29,5 +30,9 @@ class RecipeRemoteDataSource @Inject constructor(
 
         // Use Response.success() to wrap the list of recipes in a successful Response
         Response.success(successfulRecipes)
+    }
+
+    suspend fun searchRecipesByIngredients(ingredients: String): List<RecipeIdSummary> {
+        return recipeService.getRecipesByIngredients(ingredients, number = 5) // Example: fetch 10 recipes
     }
 }

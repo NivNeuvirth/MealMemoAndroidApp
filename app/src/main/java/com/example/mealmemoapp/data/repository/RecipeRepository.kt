@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mealmemoapp.data.local_database.RecipeDao
 import com.example.mealmemoapp.data.models.Recipe
+import com.example.mealmemoapp.data.models.RecipeIdSummary
 import com.example.mealmemoapp.data.remote_database.RecipeRemoteDataSource
 import com.example.mealmemoapp.utils.Resource
 import com.example.mealmemoapp.utils.performFetchingAndSaving
@@ -53,4 +54,8 @@ class RecipeRepository @Inject constructor(
     }
 
     suspend fun updateRecipe(recipe: Recipe) = localDataSource.updateRecipe(recipe)
+
+    suspend fun searchRecipesByIngredients(ingredients: String): List<RecipeIdSummary> {
+        return remoteDataSource.searchRecipesByIngredients(ingredients)
+    }
 }
