@@ -8,29 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
 import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.remote_database.PlacesApiService
-import com.example.mealmemoapp.databinding.FragmentHomePageBinding
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.mealmemoapp.databinding.FragmentStoresNearbyLayoutBinding
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.mapsplatform.transportation.consumer.model.Location
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import android.location.Location
 
 @AndroidEntryPoint
 class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
@@ -79,14 +73,16 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
         }
     }
 
+    //fusedLocationClient.lastLocation.addOnSuccessListener says need member declaration maybe building it will resolve the issue
+    //there is a declaration on line 79
+
     val fusedLocationClient=LocationServices.getFusedLocationProviderClient(requireContext())
-    fusedLocationClient.lastLocation.addOnSuccessListener{location:Location?
-        ->location?.let{
-            val userLandmark=LatLng(it.latitude,it.longitude)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLandmark,14f))
+    fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+        location?.let {
+            val userLandmark = LatLng(it.latitude, it.longitude)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLandmark, 14f))
             searchNearbyStores(userLandmark)
         }
-
     }
 
     private fun searchNearbyStores(location:LatLng){
