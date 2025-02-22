@@ -1,0 +1,57 @@
+package com.example.mealmemoapp.user_interface.favorite_recipes
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mealmemoapp.R
+import com.example.mealmemoapp.databinding.FragmentFavoriteRecipesBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes) {
+
+    private lateinit var binding: FragmentFavoriteRecipesBinding
+    private lateinit var favoriteRecipesAdapter: FavoriteRecipeAdapter
+    private lateinit var favoriteRecipesViewModel: FavoriteRecipesViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentFavoriteRecipesBinding.bind(view)
+        favoriteRecipesViewModel = ViewModelProvider(this).get(FavoriteRecipesViewModel::class.java)
+
+        favoriteRecipesAdapter = FavoriteRecipeAdapter(
+            onRecipeClick = { recipe ->
+                val bundle = Bundle().apply {
+                    putParcelable("recipe", recipe)
+                }
+                // Handle recipe click, navigate to detailed recipe
+                findNavController().navigate(R.id.action_favoriteRecipesFragment_to_detailedRecipeFragment, bundle)
+            },
+            onFavoriteClick = { recipe ->
+                favoriteRecipesViewModel.addFavorite(recipe)  // This will add to favorites
+            },
+            onRemoveClick = { recipe ->
+                favoriteRecipesViewModel.removeFavorite(recipe)  // This will remove from favorites
+            }
+        )
+
+        binding.recyclerViewFavorites.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = favoriteRecipesAdapter
+        }
+
+        favoriteRecipesViewModel.favoriteRecipes.observe(viewLifecycleOwner, Observer { recipes ->
+            favoriteRecipesAdapter.submitList(recipes)
+        })
+
+        binding.addBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_favoriteRecipesFragment_to_addOrEditRecipeFragment)
+        }
+    }
+}
+

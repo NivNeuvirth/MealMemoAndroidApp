@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.favorite_recipes.FavoriteRecipesFragment"
+    tools:context=".user_interface.favorite_recipes.FavoriteRecipesFragment"
     android:fitsSystemWindows="true"
     android:background="@color/color_light_coral">
 

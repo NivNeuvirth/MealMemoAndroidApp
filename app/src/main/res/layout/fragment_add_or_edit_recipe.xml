@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="30dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.add_or_edit_recipe.AddOrEditRecipeFragment"
+    tools:context=".user_interface.add_or_edit_recipe.AddOrEditRecipeFragment"
     android:background="@color/color_light_coral">
 
     <com.google.android.material.textfield.TextInputLayout

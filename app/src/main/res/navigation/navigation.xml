@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.mealmemoapp.ui.multiple_recipes.MultipleRecipesFragment"
+        android:name="com.example.mealmemoapp.user_interface.multiple_recipes.MultipleRecipesFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailedRecipeFragment"
-        android:name="com.example.mealmemoapp.ui.detailed_recipe.DetailedRecipeFragment"
+        android:name="com.example.mealmemoapp.user_interface.detailed_recipe.DetailedRecipeFragment"
         android:label="fragment_detailed_recipe"
         tools:layout="@layout/fragment_detailed_recipe" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
-        android:name="com.example.mealmemoapp.ui.favorite_recipes.FavoriteRecipesFragment"
+        android:name="com.example.mealmemoapp.user_interface.favorite_recipes.FavoriteRecipesFragment"
         android:label="fragment_favorite_recipes"
         tools:layout="@layout/fragment_favorite_recipes" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/addOrEditRecipeFragment"
-        android:name="com.example.mealmemoapp.ui.add_or_edit_recipe.AddOrEditRecipeFragment"
+        android:name="com.example.mealmemoapp.user_interface.add_or_edit_recipe.AddOrEditRecipeFragment"
         android:label="fragment_add_or_edit_recipe"
         tools:layout="@layout/fragment_add_or_edit_recipe" >
         <action
@@ -58,12 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/storesNearbyFragment"
-        android:name="com.example.mealmemoapp.ui.empty_fridge.StoresNearbyFragment"
+        android:name="com.example.mealmemoapp.user_interface.supermarkets_near_by.StoresNearbyFragment"
         android:label="fragment_stores_nearby_layout"
         tools:layout="@layout/fragment_stores_nearby_layout" />
     <fragment
         android:id="@+id/getRecipeByIngredients"
-        android:name="com.example.mealmemoapp.ui.by_ingredients_recipe.GetRecipeByIngredientsFragment"
+        android:name="com.example.mealmemoapp.user_interface.by_ingredients_recipe.GetRecipeByIngredientsFragment"
         android:label="GetRecipeByIngredients" >
         <action
             android:id="@+id/action_getRecipeByIngredients_to_detailedRecipeFragment"

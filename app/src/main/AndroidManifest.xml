@@ -23,7 +23,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI"/>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".user_interface.MainActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
             tools:ignore="ExtraText">

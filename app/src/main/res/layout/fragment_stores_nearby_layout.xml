@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context=".ui.empty_fridge.StoresNearbyFragment">
+    tools:context=".user_interface.supermarkets_near_by.StoresNearbyFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout

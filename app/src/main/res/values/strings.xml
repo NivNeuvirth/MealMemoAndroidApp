@@ -2,5 +2,4 @@
     <string name="app_name">MealMemoApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="google_maps_key">AIzaSyBHz2Rp5Mg1EahqAqS9iWoLOcC4ug1ZbEI</string>
 </resources>

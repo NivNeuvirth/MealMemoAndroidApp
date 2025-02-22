@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.mealmemoapp.data.local_database.IngredientTypeConverter
+import com.example.mealmemoapp.data.local.IngredientTypeConverter
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
