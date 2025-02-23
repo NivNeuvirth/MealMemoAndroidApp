@@ -14,10 +14,10 @@ class DetailedRecipeViewModel @Inject constructor(
     private val recipeRepository: RecipeRepository
 ) : ViewModel() {
 
-    // Fetch a single recipe by ID
-    fun getRecipe(id: Int): LiveData<Result<Recipe>> {
-        return recipeRepository.getRecipe(id)
-    }
+//    // Fetch a single recipe by ID
+//    fun getRecipe(id: Int): LiveData<Result<Recipe>> {
+//        return recipeRepository.getRecipe(id)
+//    }
 
     private val _chosenItem = MutableLiveData<Recipe>()
     val chosenItem : LiveData<Recipe> get() = _chosenItem

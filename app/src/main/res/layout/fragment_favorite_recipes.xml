@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_title"
-        android:text="Favorites"
+        android:text="@string/favorites_title"
         android:fontFamily="@font/ausa"
         android:layout_marginTop="10dp"
         android:textSize="32sp"

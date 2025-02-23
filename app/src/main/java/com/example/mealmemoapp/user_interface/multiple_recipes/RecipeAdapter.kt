@@ -41,9 +41,10 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
 //            callback
             this.recipe = item
             binding.itemTitle.text = item.title
-            binding.itemTime.text = "${item.readyInMinutes} min"
-            binding.itemServings.text = item.servings.toString()
-            binding.itemScore.text = String.format("%.2f", item.spoonacularScore)
+            binding.itemTime.text = binding.root.context.getString(R.string.time_format, item.readyInMinutes)
+            binding.itemServings.text = binding.root.context.getString(R.string.servings_format, item.servings)
+            binding.itemScore.text = binding.root.context.getString(R.string.score_format, item.spoonacularScore)
+
 
             Glide.with(binding.root.context)
                 .load(item.image)

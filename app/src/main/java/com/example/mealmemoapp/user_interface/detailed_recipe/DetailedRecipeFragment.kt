@@ -52,9 +52,9 @@ class DetailedRecipeFragment : Fragment() {
 
         binding.itemTitle.text = recipe.title
         binding.itemDesc.text = formattedSummary
-        binding.timeTitle.text = "Ready in ${recipe.readyInMinutes} minutes"
-        binding.scoreTitle.text = String.format("%.2f Score", recipe.spoonacularScore)
-        binding.servingsTitle.text = "${recipe.servings} Servings"
+        binding.timeTitle.text = binding.root.context.getString(R.string.ready_in_minutes, recipe.readyInMinutes)
+        binding.scoreTitle.text = getString(R.string.score_format, recipe.spoonacularScore)
+        binding.servingsTitle.text = getString(R.string.servings_format, recipe.servings)
 
         // Display ingredients in the TextView
         val ingredients = recipe.extendedIngredients?.joinToString("\n") { "• ${it.name}" } ?: "No ingredients available"

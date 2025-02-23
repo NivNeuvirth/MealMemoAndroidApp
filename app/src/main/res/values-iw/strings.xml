@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MealMemoApp</string>
+    <string name="description_title">תיאור</string>
+    <string name="ingredients_title">מצרכים</string>
+    <string name="ready_in_minutes">מוכן תוך %1$d דקות</string>
+    <string name="score_format">ציון %.2f</string>
+    <string name="servings_format">%d מנות</string>
+    <string name="time_format">%d דקות</string>
+    <string name="favorites_title">מועדפים</string>
+    <string name="nearby_supermarkets_title">סופרמרקטים בקרבת מקום</string>
+</resources>
