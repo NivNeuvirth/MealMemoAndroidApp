@@ -4,7 +4,7 @@
     <string name="description_title">תיאור</string>
     <string name="ingredients_title">מצרכים</string>
     <string name="ready_in_minutes">מוכן תוך %1$d דקות</string>
-    <string name="score_format">ציון %.2f</string>
+    <string name="score_format">ציון %d</string>
     <string name="servings_format">%d מנות</string>
     <string name="time_format">%d דקות</string>
     <string name="favorites_title">מועדפים</string>
@@ -15,4 +15,14 @@
     <string name="get_recipes_by_ingredients_title">מצא מתכונים לפי מצרכים</string>
     <string name="search_recipes">חפש מתכונים</string>
     <string name="enter_ingredients_comma_separated">הזן מרכיבים (מופרדים בפסיק)</string>
+    <string name="add_or_edit_recipe">הוסף או ערוך מתכון</string>
+    <string name="enter_the_title">"הזן כותרת "</string>
+    <string name="enter_the_time_in_minutes">הזן זמן בדקות</string>
+    <string name="enter_the_number_of_servings">הזן מספר מנות</string>
+    <string name="enter_the_score">הזן ציון</string>
+    <string name="enter_description">הזן תיאור</string>
+    <string name="enter_ingredients">הזן מצרכים</string>
+    <string name="add_image">הוסף תמונה</string>
+    <string name="save">שמור</string>
+    <string name="select_minutes">בחר דקות</string>
 </resources>

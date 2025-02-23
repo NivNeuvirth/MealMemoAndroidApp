@@ -3,13 +3,18 @@ package com.example.mealmemoapp.user_interface.add_or_edit_recipe
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mealmemoapp.R
@@ -43,41 +48,27 @@ class AddOrEditRecipeFragment : Fragment() {
 
         binding = FragmentAddOrEditRecipeBinding.inflate(inflater, container, false)
 
-        val recipe = arguments?.getParcelable("recipe_to_add_or_edit") as? Recipe
+        val recipe = arguments?.getParcelable<Recipe>("recipe_to_edit")
 
         Log.d("AddOrEditRecipeFragment", "Received Recipe: $recipe") // Debugging
+        Log.d("AddOrEditRecipeFragment", "Title: ${recipe?.title}")
+        Log.d("AddOrEditRecipeFragment", "Image URI: ${recipe?.image}")
 
-        recipe?.let {
-            binding.recipeTitle.setText(it.title)
-            binding.timeInput.setText(it.readyInMinutes)
-            binding.servingsText.text = it.servings.toString()
-            binding.scoreInput.setText(it.spoonacularScore.toString())
-            binding.recipeDesc.setText(it.summary)
-            //binding.recipeIngre.text = it.extendedIngredients
-            imageURI = Uri.parse(it.image)
-            binding.uploadedImage.setImageURI(imageURI)
+
+
+        if (recipe != null) {
+            binding.recipeTitle.setText(recipe.title)
+            binding.timeInput.setText(recipe.readyInMinutes.toString())
+            binding.servingsText.setText(recipe.servings.toString())
+            binding.scoreInput.setText(recipe.spoonacularScore.toString())
+            binding.recipeDesc.setText(recipe.summary)
+            // binding.recipeIngre.text = recipe.extendedIngredients  // Uncomment if needed
+            imageURI = Uri.parse(recipe.image)
         }
-
-        binding.timeInput.setOnClickListener {
-            val picker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
-                .setHour(0) // Default hour
-                .setMinute(0) // Default minute
-                .setTitleText("Select Time")
-                .build()
-
-            picker.addOnPositiveButtonClickListener {
-                val hour = picker.hour
-                val minute = picker.minute
-                val selectedTime = String.format("%02d:%02d", hour, minute)
-                binding.timeInput.setText(selectedTime)
-            }
-
-            picker.show(parentFragmentManager, picker.toString())
-        }
+        binding.uploadedImage.setImageURI(imageURI)
 
         binding.finishBtn.setOnClickListener {
-            // Validate inputs
+
             val title = binding.recipeTitle.text.toString().trim()
             val time = binding.timeInput.text.toString().trim().toIntOrNull() ?: 0
             val servings = binding.servingsText.text.toString().trim().toIntOrNull() ?: 0
@@ -85,41 +76,6 @@ class AddOrEditRecipeFragment : Fragment() {
             val description = binding.recipeDesc.text.toString().trim()
             val ingredients = binding.recipeIngre.text.toString().trim()
 
-            // Check for empty or null inputs
-//            when {
-//                title.isEmpty() -> {
-//                    Toast.makeText(requireContext(),
-//                        "Title can not be empty", Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//                time.isEmpty() -> {
-//                    Toast.makeText(requireContext(),
-//                        "time_cannot_be_empty", Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//                difficulty == getString(R.string.not_selected) -> {
-//                    Toast.makeText(requireContext(),
-//                        getString(R.string.please_select_a_difficulty_level), Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//                calories.isEmpty() -> {
-//                    Toast.makeText(requireContext(),
-//                        getString(R.string.calories_cannot_be_empty), Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//                description.isEmpty() -> {
-//                    Toast.makeText(requireContext(),
-//                        getString(R.string.description_cannot_be_empty), Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//                ingredients.isEmpty() -> {
-//                    Toast.makeText(requireContext(),
-//                        getString(R.string.ingredients_cannot_be_empty), Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//            }
-
-            // Process the ingredients
             val ingredientsList = ingredients
                 .split("\n")
                 .filter { it.isNotBlank() }
@@ -127,7 +83,6 @@ class AddOrEditRecipeFragment : Fragment() {
 
             val formattedIngredients = ingredientsList.joinToString("\n")
 
-            // Create the updated item
             val updatedRecipe = Recipe(
                 recipe?.id ?: 0,
                 imageURI?.toString() ?: "",
@@ -137,19 +92,17 @@ class AddOrEditRecipeFragment : Fragment() {
                 description,
                 ingredientsList,
                 score,
-                isFavorite = true
+                isFavorite = recipe?.isFavorite ?: false
                 )
 
-            // Check if updating or adding a new item
+
             if (recipe == null) {
-                updatedRecipe.id = it.id
-                viewModel.updateRecipe(updatedRecipe)
-                //viewModel.addFavorite(updatedRecipe) // Add new favorite
+                //updatedRecipe.id = it.id
+                viewModel.addFavorite(updatedRecipe)
             } else {
-                viewModel.updateFavoriteStatus(updatedRecipe) // Update existing favorite
+                viewModel.updateRecipe(updatedRecipe)
             }
 
-            // Navigate back to the list
             findNavController().navigate(R.id.action_addOrEditRecipeFragment_to_favoriteRecipesFragment)
         }
 

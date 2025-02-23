@@ -28,6 +28,7 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes) {
             onRecipeClick = { recipe ->
                 val bundle = Bundle().apply {
                     putParcelable("recipe", recipe)
+                    putBoolean("isFromFavorites", true)
                 }
                 findNavController().navigate(R.id.action_favoriteRecipesFragment_to_detailedRecipeFragment, bundle)
             },

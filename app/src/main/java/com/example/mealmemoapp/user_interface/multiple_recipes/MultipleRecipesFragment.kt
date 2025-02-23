@@ -93,6 +93,7 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         val recipe = adapter.itemAt(index)
         val bundle = Bundle().apply {
             putParcelable("recipe", recipe)
+            putBoolean("isFromFavorites", false)
         }
         findNavController().navigate(R.id.action_homePageFragment_to_detailedRecipeFragment, bundle)
     }

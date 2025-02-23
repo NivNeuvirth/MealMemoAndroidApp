@@ -16,4 +16,14 @@
     <string name="get_recipes_by_ingredients_title">Get Recipes By Ingredients</string>
     <string name="search_recipes">Search Recipes</string>
     <string name="enter_ingredients_comma_separated">Enter ingredients (comma separated)</string>
+    <string name="add_or_edit_recipe">Add Or Edit Recipe</string>
+    <string name="enter_the_title">Enter the title</string>
+    <string name="enter_the_time_in_minutes">Enter the time in minutes</string>
+    <string name="enter_the_number_of_servings">Enter the number of servings</string>
+    <string name="enter_the_score">Enter the score</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_ingredients">Enter ingredients</string>
+    <string name="add_image">Add image</string>
+    <string name="save">Save</string>
+    <string name="select_minutes">Select Minutes</string>
 </resources>
