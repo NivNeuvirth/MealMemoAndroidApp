@@ -7,4 +7,6 @@
     <color name="color_light_coral">#E0857F</color>
     <color name="color_light_pink">#EABBBC</color>
     <color name="dark_gray">#3b3b3b</color>
+    <color name="azure">#f0ffff</color>
+    <color name="azure_dark">#98f4f4</color>
 </resources>

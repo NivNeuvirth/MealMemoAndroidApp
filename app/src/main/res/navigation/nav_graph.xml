@@ -3,25 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/homePageFragment2">
 
     <fragment
         android:id="@+id/homePageFragment"
         android:name="com.example.mealmemoapp.user_interface.multiple_recipes.MultipleRecipesFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" >
+        tools:layout="@layout/fragment_multiple_recipes" >
         <action
             android:id="@+id/action_homePageFragment_to_detailedRecipeFragment"
             app:destination="@id/detailedRecipeFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_favoriteRecipesFragment"
-            app:destination="@id/favoriteRecipesFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_storesNearbyFragment"
-            app:destination="@id/storesNearbyFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_getRecipeByIngredients"
-            app:destination="@id/getRecipeByIngredients" />
     </fragment>
     <fragment
         android:id="@+id/detailedRecipeFragment"
@@ -68,5 +59,22 @@
         <action
             android:id="@+id/action_getRecipeByIngredients_to_detailedRecipeFragment"
             app:destination="@id/detailedRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePageFragment2"
+        android:name="com.example.mealmemoapp.user_interface.home_page.HomePageFragment"
+        android:label="HomePageFragment" >
+        <action
+            android:id="@+id/action_homePageFragment2_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_getRecipeByIngredients"
+            app:destination="@id/getRecipeByIngredients" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_storesNearbyFragment"
+            app:destination="@id/storesNearbyFragment" />
     </fragment>
 </navigation>

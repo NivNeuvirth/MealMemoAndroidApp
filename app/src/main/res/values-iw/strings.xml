@@ -9,4 +9,8 @@
     <string name="time_format">%d דקות</string>
     <string name="favorites_title">מועדפים</string>
     <string name="nearby_supermarkets_title">סופרמרקטים בקרבת מקום</string>
+    <string name="explore_recipes_title">גלה מתכונים</string>
+    <string name="favorite_recipes_title">מתכונים מועדפים</string>
+    <string name="nearby_supermarkets_home_title">סופרמרקטים בקרבת מקום</string>
+    <string name="get_recipes_by_ingredients_title">מצא מתכונים לפי מצרכים</string>
 </resources>

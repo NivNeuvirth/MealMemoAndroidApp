@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.databinding.FragmentHomePageBinding
+import com.example.mealmemoapp.databinding.FragmentMultipleRecipesBinding
 import com.example.mealmemoapp.utilities.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.mealmemoapp.utilities.Result
@@ -19,7 +20,7 @@ import com.example.mealmemoapp.utilities.Result
 @AndroidEntryPoint
 class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
-    private var binding: FragmentHomePageBinding by autoCleared()
+    private var binding: FragmentMultipleRecipesBinding by autoCleared()
     private val viewModel: MultipleRecipesViewModel by viewModels()
     private lateinit var adapter: RecipeAdapter
 
@@ -27,7 +28,7 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomePageBinding.inflate(inflater, container, false)
+        binding = FragmentMultipleRecipesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -65,19 +66,6 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
             // Stop the refresh animation when done
             binding.swipeRefreshLayout.isRefreshing = false
-        }
-
-        // Add the navigation listener for navigating to the favorites screen
-        binding.favoritesBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_homePageFragment_to_favoriteRecipesFragment)
-        }
-
-        binding.storesNearbyBtn.setOnClickListener{
-            findNavController().navigate(R.id.action_homePageFragment_to_storesNearbyFragment)
-        }
-
-        binding.generateRecipeBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_homePageFragment_to_getRecipeByIngredients)
         }
     }
 
