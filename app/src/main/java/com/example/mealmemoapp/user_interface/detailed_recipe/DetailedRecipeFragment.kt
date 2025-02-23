@@ -36,11 +36,10 @@ class DetailedRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the Recipe object safely using BundleCompat
         val recipe = arguments?.let { BundleCompat.getParcelable(it, "recipe", Recipe::class.java) }
 
         if (recipe != null) {
-            bindRecipeData(recipe)  // Update UI with recipe details
+            bindRecipeData(recipe)
         } else {
             Toast.makeText(requireContext(), "Recipe not found", Toast.LENGTH_SHORT).show()
         }
@@ -53,12 +52,11 @@ class DetailedRecipeFragment : Fragment() {
         binding.itemTitle.text = recipe.title
         binding.itemDesc.text = formattedSummary
         binding.timeTitle.text = binding.root.context.getString(R.string.ready_in_minutes, recipe.readyInMinutes)
-        binding.scoreTitle.text = getString(R.string.score_format, recipe.spoonacularScore)
+        binding.scoreTitle.text = getString(R.string.score_format, recipe.spoonacularScore.toInt())
         binding.servingsTitle.text = getString(R.string.servings_format, recipe.servings)
 
-        // Display ingredients in the TextView
         val ingredients = recipe.extendedIngredients?.joinToString("\n") { "• ${it.name}" } ?: "No ingredients available"
-        binding.itemIngredients.text = ingredients  // Add line breaks before each ingredient
+        binding.itemIngredients.text = ingredients
 
         Glide.with(requireContext())
             .load(recipe.image)

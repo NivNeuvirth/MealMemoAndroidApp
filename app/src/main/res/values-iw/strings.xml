@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MealMemoApp</string>
+    <string name="app_name">MealMemo</string>
     <string name="description_title">תיאור</string>
     <string name="ingredients_title">מצרכים</string>
     <string name="ready_in_minutes">מוכן תוך %1$d דקות</string>
@@ -13,4 +13,6 @@
     <string name="favorite_recipes_title">מתכונים מועדפים</string>
     <string name="nearby_supermarkets_home_title">סופרמרקטים בקרבת מקום</string>
     <string name="get_recipes_by_ingredients_title">מצא מתכונים לפי מצרכים</string>
+    <string name="search_recipes">חפש מתכונים</string>
+    <string name="enter_ingredients_comma_separated">הזן מרכיבים (מופרדים בפסיק)</string>
 </resources>

@@ -24,7 +24,6 @@ class TranslationHelper @Inject constructor(
         val deviceLanguage = Locale.getDefault().language // Get device language
 
         if (deviceLanguage != "iw") {
-            // If not Hebrew, don't translate, return original data
             onTranslated(names, summaries, ingredients)
             return
         }
@@ -33,7 +32,6 @@ class TranslationHelper @Inject constructor(
         val requestSummaries = summaries.map { TranslatorRequest(it) }
         val requestIngredients = ingredients.map { TranslatorRequest(it) }
 
-        // Translate recipe names
         translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
             "eastus",
             requestNames).enqueue(object : Callback<List<TranslatorResponse>> {
@@ -49,7 +47,6 @@ class TranslationHelper @Inject constructor(
                     emptyList()
                 }
 
-                // Translate summaries
                 translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
                     "eastus",
                     requestSummaries).enqueue(object : Callback<List<TranslatorResponse>> {
@@ -65,7 +62,6 @@ class TranslationHelper @Inject constructor(
                             emptyList()
                         }
 
-                        // Translate ingredients
                         translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
                             "eastus",
                             requestIngredients).enqueue(object : Callback<List<TranslatorResponse>> {
@@ -81,27 +77,26 @@ class TranslationHelper @Inject constructor(
                                     emptyList()
                                 }
 
-                                // Return all translated data
                                 onTranslated(translatedNames, translatedSummaries, translatedIngredients)
                             }
 
                             override fun onFailure(call: Call<List<TranslatorResponse>>, t: Throwable) {
                                 Log.e("TranslationHelper", "Translation API call failed: ${t.message}")
-                                onTranslated(names, summaries, ingredients) // Fallback to original data if the API request fails
+                                onTranslated(names, summaries, ingredients)
                             }
                         })
                     }
 
                     override fun onFailure(call: Call<List<TranslatorResponse>>, t: Throwable) {
                         Log.e("TranslationHelper", "Translation API call failed: ${t.message}")
-                        onTranslated(names, summaries, ingredients) // Fallback to original data if the API request fails
+                        onTranslated(names, summaries, ingredients)
                     }
                 })
             }
 
             override fun onFailure(call: Call<List<TranslatorResponse>>, t: Throwable) {
                 Log.e("TranslationHelper", "Translation API call failed: ${t.message}")
-                onTranslated(names, summaries, ingredients) // Fallback to original data if the API request fails
+                onTranslated(names, summaries, ingredients)
             }
         })
     }

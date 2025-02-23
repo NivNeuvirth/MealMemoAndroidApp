@@ -29,16 +29,30 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes) {
                 val bundle = Bundle().apply {
                     putParcelable("recipe", recipe)
                 }
-                // Handle recipe click, navigate to detailed recipe
                 findNavController().navigate(R.id.action_favoriteRecipesFragment_to_detailedRecipeFragment, bundle)
             },
             onFavoriteClick = { recipe ->
-                favoriteRecipesViewModel.addFavorite(recipe)  // This will add to favorites
+                favoriteRecipesViewModel.addFavorite(recipe)
             },
             onRemoveClick = { recipe ->
-                favoriteRecipesViewModel.removeFavorite(recipe)  // This will remove from favorites
+                favoriteRecipesViewModel.removeFavorite(recipe)
             }
         )
+
+        favoriteRecipesViewModel.favoriteRecipes.observe(viewLifecycleOwner, Observer { recipes ->
+            favoriteRecipesAdapter.setFullList(recipes)
+        })
+
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                favoriteRecipesAdapter.filterList(newText.orEmpty())
+                return true
+            }
+        })
 
         binding.recyclerViewFavorites.apply {
             layoutManager = LinearLayoutManager(context)

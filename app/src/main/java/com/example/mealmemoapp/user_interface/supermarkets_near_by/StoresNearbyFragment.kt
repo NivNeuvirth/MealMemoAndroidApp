@@ -84,13 +84,10 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             location?.let {
+
                 val userLandmark = LatLng(it.latitude, it.longitude)
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLandmark, 14f))
-
-                // Add a marker for the user's location
                 map.addMarker(MarkerOptions().position(userLandmark).title("Your Location"))
-
-                // Enable the location layer on the map
                 map.isMyLocationEnabled = true
                 searchNearbyStores(userLandmark)
             }
@@ -106,7 +103,7 @@ class StoresNearbyFragment: Fragment(),OnMapReadyCallback {
                 val response = placesApi.getNearbyPlaces(locationString, 10000, "supermarket", apiKey)
                 if (response.isSuccessful) {
                     response.body()?.let { placesResponse ->
-                        // Clear existing markers
+
                         map.clear()
 
                         for (place in placesResponse.results) {

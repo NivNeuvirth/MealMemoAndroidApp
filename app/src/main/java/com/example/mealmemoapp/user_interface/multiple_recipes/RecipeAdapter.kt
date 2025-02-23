@@ -12,9 +12,6 @@ import com.example.mealmemoapp.databinding.RecipeLayoutBinding
 
 class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):RecyclerView.Adapter<RecipeAdapter.ItemViewHolder>() {
 
-    private var filteredItems: List<Recipe> = items
-    private var originalItems: List<Recipe> = items
-
     interface ItemListener{
         fun onItemClicked(index:Int)
         fun onFavoriteClicked(recipe: Recipe)
@@ -37,22 +34,20 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
             callback.onItemClicked(adapterPosition)
         }
 
-        fun bind(item: Recipe) {
-//            callback
-            this.recipe = item
-            binding.itemTitle.text = item.title
-            binding.itemTime.text = binding.root.context.getString(R.string.time_format, item.readyInMinutes)
-            binding.itemServings.text = binding.root.context.getString(R.string.servings_format, item.servings)
-            binding.itemScore.text = binding.root.context.getString(R.string.score_format, item.spoonacularScore)
+        fun bind(recipe: Recipe) {
 
+            this.recipe = recipe
+            binding.itemTitle.text = recipe.title
+            binding.itemTime.text = binding.root.context.getString(R.string.time_format, recipe.readyInMinutes)
+            binding.itemServings.text = binding.root.context.getString(R.string.servings_format, recipe.servings)
+            binding.itemScore.text = binding.root.context.getString(R.string.score_format, recipe.spoonacularScore.toInt())
 
             Glide.with(binding.root.context)
-                .load(item.image)
+                .load(recipe.image)
                 .into(binding.itemImage)
 
-            // Set the favorite icon status based on isFavorite
             binding.favoriteButton.setImageResource(
-                if (item.isFavorite) R.drawable.favorite_filled_24px else R.drawable.favorite_24px
+                if (recipe.isFavorite) R.drawable.favorite_filled_24px else R.drawable.favorite_24px
             )
         }
     }
@@ -66,14 +61,4 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
         holder.bind(items[position])
 
     override fun getItemCount()= items.size
-
-    fun filter(query: String) {
-        filteredItems = if (query.isEmpty()) {
-            originalItems
-        } else {
-            items.filter { it.title.contains(query, ignoreCase = true) }
-        }
-        items = filteredItems
-        notifyDataSetChanged()
-    }
 }

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
-import com.example.mealmemoapp.databinding.FragmentHomePageBinding
 import com.example.mealmemoapp.databinding.FragmentMultipleRecipesBinding
 import com.example.mealmemoapp.utilities.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +36,6 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
         setupRecyclerView()
 
-        // Observe the LiveData for the recipes
         viewModel.recipes.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Success -> {
@@ -56,15 +54,11 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
             }
         }
 
-        // Trigger the initial data fetch when the fragment is created
         viewModel.getRandomRecipes()
 
-        // Swipe-to-refresh listener
         binding.swipeRefreshLayout.setOnRefreshListener {
-            // Call the ViewModel function to fetch new data
-            viewModel.getRandomRecipes(forceRefresh = true)
 
-            // Stop the refresh animation when done
+            viewModel.getRandomRecipes(forceRefresh = true)
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
@@ -96,14 +90,13 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
     }
 
     override fun onItemClicked(index: Int) {
-        val recipe = adapter.itemAt(index)  // Get the clicked recipe
+        val recipe = adapter.itemAt(index)
         val bundle = Bundle().apply {
-            putParcelable("recipe", recipe)  // Put the Recipe object into the bundle
+            putParcelable("recipe", recipe)
         }
         findNavController().navigate(R.id.action_homePageFragment_to_detailedRecipeFragment, bundle)
     }
 
-    //     Handle the favorite click
     override fun onFavoriteClicked(recipe: Recipe) {
         viewModel.updateFavoriteStatus(recipe)
     }

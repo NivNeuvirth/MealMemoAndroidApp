@@ -56,22 +56,24 @@
                     android:text="duration"
                     android:textSize="16sp"
                     android:textColor="@color/white"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="2dp"
                     android:layout_weight="1"
                     app:drawableStartCompat="@drawable/schedule_24px"
                     app:drawableTint="@color/color_light_coral" />
 
                 <TextView
+                    android:id="@+id/item_servings"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/item_servings"
+                    android:layout_weight="1"
                     android:text="servings"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:drawablePadding="8dp"
-                    android:layout_weight="1"
+                    android:drawablePadding="2dp"
                     app:drawableStartCompat="@drawable/restaurant_24px"
-                    app:drawableTint="@color/color_light_coral" />
+                    app:drawableTint="@color/color_light_coral"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -80,7 +82,7 @@
                     android:text="score"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="2dp"
                     android:layout_weight="1"
                     app:drawableStartCompat="@drawable/stars_24px"
                     app:drawableTint="@color/color_light_coral" />

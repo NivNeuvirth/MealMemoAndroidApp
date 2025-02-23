@@ -16,6 +16,22 @@ class FavoriteRecipeAdapter(
     private val onRemoveClick: (Recipe) -> Unit
 ) : ListAdapter<Recipe, FavoriteRecipeAdapter.FavoriteViewHolder>(RecipeDiffCallback()) {
 
+    private var fullRecipeList: List<Recipe> = listOf()
+
+    fun setFullList(recipes: List<Recipe>) {
+        fullRecipeList = recipes
+        submitList(fullRecipeList)
+    }
+
+    fun filterList(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullRecipeList
+        } else {
+            fullRecipeList.filter { it.title.contains(query, ignoreCase = true) }
+        }
+        submitList(filteredList)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding = RecipeLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(binding)
@@ -29,29 +45,29 @@ class FavoriteRecipeAdapter(
     inner class FavoriteViewHolder(private val binding: RecipeLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.itemTitle.text = recipe.title
-            binding.itemTime.text = "${recipe.readyInMinutes} min"
-            binding.itemServings.text = "${recipe.servings} servings"
-            binding.itemScore.text = String.format("%.2f", recipe.spoonacularScore)
+            binding.itemTime.text = binding.root.context.getString(R.string.time_format, recipe.readyInMinutes)
+            binding.itemServings.text = binding.root.context.getString(R.string.servings_format, recipe.servings)
+            binding.itemScore.text = binding.root.context.getString(R.string.score_format, recipe.spoonacularScore.toInt())
 
             Glide.with(binding.root.context)
                 .load(recipe.image)
                 .into(binding.itemImage)
 
             binding.root.setOnClickListener { onRecipeClick(recipe) }
-            // Handle favorite button click
+
             binding.favoriteButton.apply {
-                // Change button text/icon based on whether the recipe is marked as favorite
+
                 if (recipe.isFavorite) {
-                    setImageResource(R.drawable.favorite_filled_24px)  // Your filled favorite icon
+                    setImageResource(R.drawable.favorite_filled_24px)
                 } else {
-                    setImageResource(R.drawable.favorite_24px)  // Your outline favorite icon
+                    setImageResource(R.drawable.favorite_24px)
                 }
 
                 setOnClickListener {
                     if (recipe.isFavorite) {
-                        onRemoveClick(recipe)  // Remove from favorites
+                        onRemoveClick(recipe)
                     } else {
-                        onFavoriteClick(recipe)  // Add to favorites
+                        onFavoriteClick(recipe)
                     }
                 }
             }
@@ -63,4 +79,3 @@ class FavoriteRecipeAdapter(
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe) = oldItem == newItem
     }
 }
-
