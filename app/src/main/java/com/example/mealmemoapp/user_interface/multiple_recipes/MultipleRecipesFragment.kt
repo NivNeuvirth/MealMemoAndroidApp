@@ -45,11 +45,8 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
                         adapter.notifyDataSetChanged()
                     }
                 }
-                is Result.Error -> {
+                is Result.Failure -> {
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                }
-                is Result.Loading -> {
-                    // Show loading state (optional)
                 }
             }
         }

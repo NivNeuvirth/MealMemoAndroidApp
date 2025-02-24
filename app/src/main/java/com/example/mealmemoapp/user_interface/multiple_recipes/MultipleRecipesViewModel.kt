@@ -35,7 +35,7 @@ class MultipleRecipesViewModel @Inject constructor(
         viewModelScope.launch {
             try {
 
-                val randomIds = (600000..700000).shuffled().take(7)
+                val randomIds = (600000..700000).shuffled().take(3)
                 val response = recipeRepository.getRecipes(randomIds)
 
                 response.observeForever { resource ->
@@ -78,7 +78,7 @@ class MultipleRecipesViewModel @Inject constructor(
                     isDataFetched = true
                 }
             } catch (e: Exception) {
-                _recipes.postValue(Result.Error("Failed to fetch recipes"))
+                _recipes.postValue(Result.Failure("Failed to fetch recipes"))
             }
         }
     }

@@ -16,7 +16,6 @@ import com.example.mealmemoapp.user_interface.multiple_recipes.RecipeAdapter
 import com.example.mealmemoapp.utilities.Result
 import com.example.mealmemoapp.utilities.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 @AndroidEntryPoint
 class GetRecipeByIngredientsFragment : Fragment(), RecipeAdapter.ItemListener {
@@ -55,12 +54,8 @@ class GetRecipeByIngredientsFragment : Fragment(), RecipeAdapter.ItemListener {
                     }
                 }
 
-                is Result.Error -> {
+                is Result.Failure -> {
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Loading -> {
-                    // Show loading state if needed
                 }
             }
         }

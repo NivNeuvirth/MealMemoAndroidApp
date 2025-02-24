@@ -96,7 +96,6 @@ class AddOrEditRecipeFragment : Fragment() {
 
 
             if (recipe == null) {
-                //updatedRecipe.id = it.id
                 viewModel.addFavorite(updatedRecipe)
             } else {
                 viewModel.updateRecipe(updatedRecipe)

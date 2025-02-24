@@ -12,10 +12,10 @@ abstract class ApiResponseHandler {
                 val body = result.body()
                 if (body != null) return Result.Success(body)
             }
-            return Result.Error("Network call has failed for the following reason: " +
+            return Result.Failure("Network call has failed for the following reason: " +
                     "${result.message()} ${result.code()}")
         } catch (e: Exception) {
-            return Result.Error("Network call has failed for the following reason: " +
+            return Result.Failure("Network call has failed for the following reason: " +
                     (e.localizedMessage ?: e.toString()))
         }
     }

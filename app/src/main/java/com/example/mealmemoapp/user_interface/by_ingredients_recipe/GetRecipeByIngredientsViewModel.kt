@@ -24,7 +24,6 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
     val recipes: LiveData<Result<List<Recipe>>> get() = _recipes
 
     fun searchRecipesByIngredients(ingredients: String, number: Int = 5) {
-        _recipes.value = Result.Loading()
 
         viewModelScope.launch {
             try {
@@ -87,7 +86,7 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
                     _recipes.value = Result.Success(emptyList())
                 }
             } catch (e: Exception) {
-                _recipes.value = Result.Error(e.localizedMessage ?: "Error fetching recipes")
+                _recipes.value = Result.Failure(e.localizedMessage ?: "Error fetching recipes")
             }
         }
     }

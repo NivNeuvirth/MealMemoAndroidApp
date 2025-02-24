@@ -16,13 +16,11 @@ class DataSource @Inject constructor() {
         shouldFetchFromRemote: () -> Boolean
     ): LiveData<Result<LocalType>> = liveData(Dispatchers.IO) {
 
-        emit(Result.Loading())
-
         val localDataStream: LiveData<Result<LocalType>> = getLocalData().map { localData ->
             if (localData != null) {
                 Result.Success(localData)
             } else {
-                Result.Error("No local data available")
+                Result.Failure("No local data available")
             }
         }
 
@@ -34,12 +32,10 @@ class DataSource @Inject constructor() {
             is Result.Success -> {
                 saveToLocalDb(remoteResponse.data)
             }
-            is Result.Error -> {
-                emit(Result.Error(remoteResponse.message))
+            is Result.Failure -> {
+                emit(Result.Failure(remoteResponse.message))
                 emitSource(localDataStream)
             }
-
-            is Result.Loading -> TODO()
         }
     }
 }
