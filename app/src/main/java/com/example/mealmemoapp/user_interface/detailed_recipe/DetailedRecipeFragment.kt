@@ -38,7 +38,8 @@ class DetailedRecipeFragment : Fragment() {
         if (recipeToEdit != null) {
             bindRecipeData(recipeToEdit)
         } else {
-            Toast.makeText(requireContext(), "No recipe found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.no_recipe_found_txt), Toast.LENGTH_SHORT).show()
         }
 
         if (isFromFavorites) {

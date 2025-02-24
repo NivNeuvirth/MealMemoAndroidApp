@@ -26,4 +26,16 @@
     <string name="add_image">Add image</string>
     <string name="save">Save</string>
     <string name="select_minutes">Select Minutes</string>
+    <string name="bottom_sheet_title_txt" translatable="false">bottom_sheet_title</string>
+    <string name="time_txt" translatable="false">time_txt</string>
+    <string name="servings_txt" translatable="false">servings_txt</string>
+    <string name="score_txt" translatable="false">score_txt</string>
+    <string name="this_is_the_bottom_sheet_description" translatable="false">this_is_the_bottom_sheet_description</string>
+    <string name="this_is_the_item_desc" translatable="false">this_is_the_item_desc</string>
+    <string name="edit_icon" translatable="false">edit_icon</string>
+    <string name="main_item_title" translatable="false">Main item title</string>
+    <string name="duration" translatable="false">duration</string>
+    <string name="servings" translatable="false">servings</string>
+    <string name="score" translatable="false">score</string>
+    <string name="no_recipe_found_txt">No recipe found</string>
 </resources>

@@ -48,7 +48,7 @@
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="bottom_sheet_title"
+                android:text="@string/bottom_sheet_title_txt"
                 android:fontFamily="@font/ausa"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="time_txt"
+                android:text="@string/time_txt"
                 android:textColor="@color/color_dark_purple"
                 android:drawablePadding="5dp"
                 app:drawableStartCompat="@drawable/schedule_24px" />
@@ -70,17 +70,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="servings_txt"
+                android:text="@string/servings_txt"
                 android:textColor="@color/color_dark_purple"
-                android:drawableStart="@drawable/restaurant_24px"
-                android:drawablePadding="5dp" />
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/restaurant_24px" />
 
             <TextView
                 android:id="@+id/score_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="score_txt"
+                android:text="@string/score_txt"
                 android:drawablePadding="5dp"
                 android:textColor="@color/color_dark_purple"
                 app:drawableStartCompat="@drawable/stars_24px" />
@@ -100,7 +100,7 @@
                 android:id="@+id/item_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="this_is_the_bottom_sheet_description"
+                android:text="@string/this_is_the_bottom_sheet_description"
                 android:textSize="16sp"
                 android:textColor="@color/color_dark_purple" />
 
@@ -119,7 +119,7 @@
                 android:id="@+id/item_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="this_is_the_item_desc"
+                android:text="@string/this_is_the_item_desc"
                 android:textSize="16sp"
                 android:textColor="@color/color_dark_purple"/>
         </LinearLayout>
@@ -130,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/edit_24px"
-        android:contentDescription="edit_icon"
+        android:contentDescription="@string/edit_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"

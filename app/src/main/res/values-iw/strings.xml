@@ -25,4 +25,5 @@
     <string name="add_image">הוסף תמונה</string>
     <string name="save">שמור</string>
     <string name="select_minutes">בחר דקות</string>
+    <string name="no_recipe_found_txt">לא נמצא מתכון</string>
 </resources>
