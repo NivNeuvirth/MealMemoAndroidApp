@@ -24,9 +24,6 @@ class MultipleRecipesViewModel @Inject constructor(
     private val _recipes = MutableLiveData<Result<List<Recipe>>>()
     val recipes: LiveData<Result<List<Recipe>>> = _recipes
 
-    private val _chosenItem = MutableLiveData<Recipe>()
-    val chosenItem : LiveData<Recipe> get() = _chosenItem
-
     private var isDataFetched = false
 
     fun getRandomRecipes(forceRefresh: Boolean = false) {
@@ -38,7 +35,7 @@ class MultipleRecipesViewModel @Inject constructor(
         viewModelScope.launch {
             try {
 
-                val randomIds = (600000..700000).shuffled().take(1)
+                val randomIds = (600000..700000).shuffled().take(7)
                 val response = recipeRepository.getRecipes(randomIds)
 
                 response.observeForever { resource ->

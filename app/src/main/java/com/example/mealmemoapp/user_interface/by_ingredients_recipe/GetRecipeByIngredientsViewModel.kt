@@ -11,6 +11,7 @@ import com.example.mealmemoapp.utilities.Result
 import com.example.mealmemoapp.utilities.TranslationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +28,21 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                val summaries = repository.searchRecipesByIngredients(ingredients)
+
+                val translatedIngredients = if (Locale.getDefault().language == "iw") {
+                    // Split the ingredients by comma and translate each one
+                    val ingredientList = ingredients.split(",").map { it.trim() }
+                    Log.d("Translation", "Original Ingredients List: $ingredientList")
+                    val translatedList = ingredientList.map { ingredient ->
+                        translationHelper.translateText(ingredient, "he", "en") ?: ingredient
+                    }
+                    translatedList.joinToString(", ") // Join back into a single string
+                } else {
+                    ingredients
+                }
+                Log.d("Translation", "Translated Ingredients: ${translatedIngredients}")
+
+                val summaries = repository.searchRecipesByIngredients(translatedIngredients)
                 val recipeIds = summaries.map { it.id }
 
                 if (recipeIds.isNotEmpty()) {

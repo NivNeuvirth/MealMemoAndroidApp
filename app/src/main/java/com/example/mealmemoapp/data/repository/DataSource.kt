@@ -20,9 +20,9 @@ class DataSource @Inject constructor() {
 
         val localDataStream: LiveData<Result<LocalType>> = getLocalData().map { localData ->
             if (localData != null) {
-                Result.Success(localData) as Result<LocalType>  // Cast to ensure correct type
+                Result.Success(localData)
             } else {
-                Result.Error("No local data available") as Result<LocalType>  // Cast to ensure correct type
+                Result.Error("No local data available")
             }
         }
 

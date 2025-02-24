@@ -69,31 +69,10 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
         binding.recyclerMainVertical.adapter = adapter
     }
 
-    private fun observeMultipleRecipesData() {
-        viewModel.recipes.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Success -> {
-                    val recipes = result.data
-                    if (recipes != null) {
-                        adapter.items = recipes
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                is Result.Error -> {
-                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                }
-                is Result.Loading -> {
-                    // Show loading indicator
-                }
-            }
-        }
-    }
-
     override fun onItemClicked(index: Int) {
         val recipe = adapter.itemAt(index)
         val bundle = Bundle().apply {
             putParcelable("recipe", recipe)
-            putBoolean("isFromFavorites", false)
         }
         findNavController().navigate(R.id.action_homePageFragment_to_detailedRecipeFragment, bundle)
     }

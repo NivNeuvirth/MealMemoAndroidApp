@@ -76,27 +76,11 @@ class RecipeRepository @Inject constructor(
     private val dataSource: DataSource
 ) {
 
-    // not sure if used
-    fun getRecipe(id: Int): LiveData<Result<Recipe>> = dataSource.retrieveAndStoreData(
-        getLocalData = { localDataSource.getRecipe(id) },
-        fetchRemoteData = { remoteDataSource.getRecipe(id) },
-        saveToLocalDb = { localDataSource.addRecipe(it) },
-        shouldFetchFromRemote = { localDataSource.getRecipeSync(id) == null }
-    )
-
     fun getRecipes(ids: List<Int>): LiveData<Result<List<Recipe>>> = dataSource.retrieveAndStoreData(
         getLocalData = { localDataSource.getRecipes(ids) },
         fetchRemoteData = { remoteDataSource.getRecipes(ids) },
         saveToLocalDb = { localDataSource.addRecipes(it) },
         shouldFetchFromRemote = { localDataSource.getRecipesSync(ids).isEmpty() }
-    )
-
-    // not sure if used
-    fun getRecipeWithIngredients(id: Int): LiveData<Result<Recipe>> = dataSource.retrieveAndStoreData(
-        getLocalData = { localDataSource.getRecipe(id) },
-        fetchRemoteData = { remoteDataSource.getRecipe(id) },
-        saveToLocalDb = { localDataSource.addRecipe(it) },
-        shouldFetchFromRemote = { localDataSource.getRecipeSync(id) == null }
     )
 
     fun getFavoriteRecipes(): LiveData<List<Recipe>> = localDataSource.getFavoriteRecipes()

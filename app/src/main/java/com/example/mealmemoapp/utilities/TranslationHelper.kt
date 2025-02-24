@@ -5,6 +5,8 @@ import com.example.mealmemoapp.data.remote.api.TranslatorApiService
 import com.example.mealmemoapp.data.models.TranslatorRequest
 import com.example.mealmemoapp.data.models.TranslatorResponse
 import com.example.mealmemoapp.utilities.Constants
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +36,7 @@ class TranslationHelper @Inject constructor(
 
         translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
             "eastus",
-            requestNames).enqueue(object : Callback<List<TranslatorResponse>> {
+            requestNames, "en", "he").enqueue(object : Callback<List<TranslatorResponse>> {
             override fun onResponse(
                 call: Call<List<TranslatorResponse>>,
                 response: Response<List<TranslatorResponse>>
@@ -49,7 +51,7 @@ class TranslationHelper @Inject constructor(
 
                 translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
                     "eastus",
-                    requestSummaries).enqueue(object : Callback<List<TranslatorResponse>> {
+                    requestSummaries, "en", "he").enqueue(object : Callback<List<TranslatorResponse>> {
                     override fun onResponse(
                         call: Call<List<TranslatorResponse>>,
                         response: Response<List<TranslatorResponse>>
@@ -64,7 +66,7 @@ class TranslationHelper @Inject constructor(
 
                         translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API,
                             "eastus",
-                            requestIngredients).enqueue(object : Callback<List<TranslatorResponse>> {
+                            requestIngredients, "en", "he").enqueue(object : Callback<List<TranslatorResponse>> {
                             override fun onResponse(
                                 call: Call<List<TranslatorResponse>>,
                                 response: Response<List<TranslatorResponse>>
@@ -99,5 +101,26 @@ class TranslationHelper @Inject constructor(
                 onTranslated(names, summaries, ingredients)
             }
         })
+    }
+
+    suspend fun translateText(text: String, fromLanguage: String, toLanguage: String): String? {
+        // Make the network request on the IO thread
+        return withContext(Dispatchers.IO) {
+            try {
+                val request = TranslatorRequest(text)
+                val response = translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API, "eastus", listOf(request), "he", "en").execute()
+
+                if (response.isSuccessful) {
+                    // Extract and return the translated text
+                    return@withContext response.body()?.firstOrNull()?.translations?.firstOrNull()?.text
+                } else {
+                    Log.e("TranslationHelper", "Translation API failed: ${response.errorBody()?.string()}")
+                    return@withContext null
+                }
+            } catch (e: Exception) {
+                Log.e("TranslationHelper", "Translation API call failed: ${e.message}")
+                return@withContext null
+            }
+        }
     }
 }

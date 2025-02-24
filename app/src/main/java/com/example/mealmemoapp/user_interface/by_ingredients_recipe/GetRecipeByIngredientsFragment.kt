@@ -16,6 +16,7 @@ import com.example.mealmemoapp.user_interface.multiple_recipes.RecipeAdapter
 import com.example.mealmemoapp.utilities.Result
 import com.example.mealmemoapp.utilities.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class GetRecipeByIngredientsFragment : Fragment(), RecipeAdapter.ItemListener {
@@ -40,7 +41,7 @@ class GetRecipeByIngredientsFragment : Fragment(), RecipeAdapter.ItemListener {
         binding.searchButton.setOnClickListener {
             val ingredients = binding.ingredientsEditText.text.toString()
             if (ingredients.isNotEmpty()) {
-                viewModel.searchRecipesByIngredients(ingredients)
+                viewModel.searchRecipesByIngredients(ingredients, 5)
             }
         }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
+import android.text.SpannableStringBuilder
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -62,7 +63,7 @@ class AddOrEditRecipeFragment : Fragment() {
             binding.servingsText.setText(recipe.servings.toString())
             binding.scoreInput.setText(recipe.spoonacularScore.toString())
             binding.recipeDesc.setText(recipe.summary)
-            // binding.recipeIngre.text = recipe.extendedIngredients  // Uncomment if needed
+            binding.recipeIngre.text = SpannableStringBuilder(recipe.extendedIngredients.joinToString(", ") { it.name })
             imageURI = Uri.parse(recipe.image)
         }
         binding.uploadedImage.setImageURI(imageURI)
@@ -80,8 +81,6 @@ class AddOrEditRecipeFragment : Fragment() {
                 .split("\n")
                 .filter { it.isNotBlank() }
                 .mapIndexed { index, ingredient -> Ingredient(index, ingredient) }
-
-            val formattedIngredients = ingredientsList.joinToString("\n")
 
             val updatedRecipe = Recipe(
                 recipe?.id ?: 0,

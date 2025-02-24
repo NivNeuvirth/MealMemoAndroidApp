@@ -1,24 +1,18 @@
 package com.example.mealmemoapp.user_interface.detailed_recipe
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.mealmemoapp.R
 import com.example.mealmemoapp.data.models.Recipe
 import com.example.mealmemoapp.databinding.FragmentDetailedRecipeBinding
-import com.example.mealmemoapp.user_interface.multiple_recipes.MultipleRecipesViewModel
 import com.example.mealmemoapp.utilities.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailedRecipeFragment : Fragment() {
 
     private var binding: FragmentDetailedRecipeBinding by autoCleared()
-    private val viewModel: MultipleRecipesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
