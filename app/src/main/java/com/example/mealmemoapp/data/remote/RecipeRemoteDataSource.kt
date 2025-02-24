@@ -10,8 +10,6 @@ class RecipeRemoteDataSource @Inject constructor(
     private val recipeService: RecipeApiService
 )   : ApiResponseHandler() {
 
-    suspend fun getRecipe(id : Int) = fetchResult { recipeService.getRecipe(id) }
-
     suspend fun getRecipes(ids: List<Int>) = fetchResult {
         val responses = mutableListOf<Response<Recipe>>()
         for (id in ids) {
@@ -26,6 +24,6 @@ class RecipeRemoteDataSource @Inject constructor(
     }
 
     suspend fun searchRecipesByIngredients(ingredients: String): List<RecipeIdSummary> {
-        return recipeService.getRecipesByIngredients(ingredients, number = 2) // Example: fetch 10 recipes
+        return recipeService.getRecipesByIngredients(ingredients, number = 5)
     }
 }

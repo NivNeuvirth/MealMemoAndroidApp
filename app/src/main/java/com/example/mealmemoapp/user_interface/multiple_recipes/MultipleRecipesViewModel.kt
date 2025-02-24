@@ -1,24 +1,21 @@
 package com.example.mealmemoapp.user_interface.multiple_recipes
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mealmemoapp.data.models.Recipe
-import com.example.mealmemoapp.data.remote.api.TranslatorApiService
 import com.example.mealmemoapp.data.repository.RecipeRepository
 import com.example.mealmemoapp.utilities.Result
 import com.example.mealmemoapp.utilities.TranslationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class MultipleRecipesViewModel @Inject constructor(
     private val recipeRepository: RecipeRepository,
-    private val translationHelper: TranslationHelper // Inject the TranslationHelper
+    private val translationHelper: TranslationHelper
 ) : ViewModel() {
 
     private val _recipes = MutableLiveData<Result<List<Recipe>>>()
@@ -35,7 +32,7 @@ class MultipleRecipesViewModel @Inject constructor(
         viewModelScope.launch {
             try {
 
-                val randomIds = (600000..700000).shuffled().take(3)
+                val randomIds = (600000..700000).shuffled().take(5)
                 val response = recipeRepository.getRecipes(randomIds)
 
                 response.observeForever { resource ->
@@ -48,18 +45,10 @@ class MultipleRecipesViewModel @Inject constructor(
                         val recipeSummaries = recipes?.map { it.summary } ?: emptyList()
                         val recipeIngredients = recipes?.flatMap { it.extendedIngredients.map { ingredient -> ingredient.name } } ?: emptyList()
 
-                        Log.d("MultipleRecipesViewModel", "Recipe Names: $recipeNames")
-                        Log.d("MultipleRecipesViewModel", "Recipe Summaries: $recipeSummaries")
-                        Log.d("MultipleRecipesViewModel", "Recipe Ingredients: $recipeIngredients")
-
-                        val nonNullableRecipeNames = recipeNames.filterNotNull()
-                        val nonNullableRecipeSummaries = recipeSummaries.filterNotNull()
-                        val nonNullableRecipeIngredients = recipeIngredients.filterNotNull()
-
                         translationHelper.translateData(
-                            nonNullableRecipeNames,
-                            nonNullableRecipeSummaries,
-                            nonNullableRecipeIngredients
+                            recipeNames,
+                            recipeSummaries,
+                            recipeIngredients
                         ) { translatedNames, translatedSummaries, translatedIngredients ->
 
                             val updatedRecipes = recipes?.mapIndexed { index, recipe ->

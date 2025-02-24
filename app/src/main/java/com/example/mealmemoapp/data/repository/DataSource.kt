@@ -9,32 +9,16 @@ import javax.inject.Inject
 
 class DataSource @Inject constructor() {
 
-    fun <LocalType, RemoteType> retrieveAndStoreData(
-        getLocalData: () -> LiveData<LocalType>,
+    fun <RemoteType> fetchRemoteData(
         fetchRemoteData: suspend () -> Result<RemoteType>,
-        saveToLocalDb: suspend (RemoteType) -> Unit,
-        shouldFetchFromRemote: () -> Boolean
-    ): LiveData<Result<LocalType>> = liveData(Dispatchers.IO) {
-
-        val localDataStream: LiveData<Result<LocalType>> = getLocalData().map { localData ->
-            if (localData != null) {
-                Result.Success(localData)
-            } else {
-                Result.Failure("No local data available")
-            }
-        }
-
-        emitSource(localDataStream)
-
-        if (!shouldFetchFromRemote()) return@liveData
+    ): LiveData<Result<RemoteType>> = liveData(Dispatchers.IO) {
 
         when (val remoteResponse = fetchRemoteData()) {
             is Result.Success -> {
-                saveToLocalDb(remoteResponse.data)
+                emit(Result.Success(remoteResponse.data))
             }
             is Result.Failure -> {
-                emit(Result.Failure(remoteResponse.message))
-                emitSource(localDataStream)
+                emit(Result.Failure("Network ERROR, Check Connection to the Internet..."))
             }
         }
     }

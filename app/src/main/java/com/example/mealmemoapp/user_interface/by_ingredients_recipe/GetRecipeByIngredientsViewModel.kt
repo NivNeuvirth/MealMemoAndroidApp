@@ -1,6 +1,5 @@
 package com.example.mealmemoapp.user_interface.by_ingredients_recipe
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,17 +28,15 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
             try {
 
                 val translatedIngredients = if (Locale.getDefault().language == "iw") {
-                    // Split the ingredients by comma and translate each one
+
                     val ingredientList = ingredients.split(",").map { it.trim() }
-                    Log.d("Translation", "Original Ingredients List: $ingredientList")
                     val translatedList = ingredientList.map { ingredient ->
                         translationHelper.translateText(ingredient, "he", "en") ?: ingredient
                     }
-                    translatedList.joinToString(", ") // Join back into a single string
+                    translatedList.joinToString(", ")
                 } else {
                     ingredients
                 }
-                Log.d("Translation", "Translated Ingredients: ${translatedIngredients}")
 
                 val summaries = repository.searchRecipesByIngredients(translatedIngredients)
                 val recipeIds = summaries.map { it.id }
@@ -55,18 +52,10 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
                             val recipeSummaries = recipes?.map { it.summary } ?: emptyList()
                             val recipeIngredients = recipes?.flatMap { it.extendedIngredients.map { ingredient -> ingredient.name } } ?: emptyList()
 
-                            Log.d("GetRecipeByIngredientsViewModel", "Recipe Names: $recipeNames")
-                            Log.d("GetRecipeByIngredientsViewModel", "Recipe Summaries: $recipeSummaries")
-                            Log.d("GetRecipeByIngredientsViewModel", "Recipe Ingredients: $recipeIngredients")
-
-                            val nonNullableRecipeNames = recipeNames.filterNotNull()
-                            val nonNullableRecipeSummaries = recipeSummaries.filterNotNull()
-                            val nonNullableRecipeIngredients = recipeIngredients.filterNotNull()
-
                             translationHelper.translateData(
-                                nonNullableRecipeNames,
-                                nonNullableRecipeSummaries,
-                                nonNullableRecipeIngredients
+                                recipeNames,
+                                recipeSummaries,
+                                recipeIngredients
                             ) { translatedNames, translatedSummaries, translatedIngredients ->
 
                                 val updatedRecipes = recipes?.mapIndexed { index, recipe ->
@@ -86,7 +75,7 @@ class GetRecipeByIngredientsViewModel @Inject constructor(
                     _recipes.value = Result.Success(emptyList())
                 }
             } catch (e: Exception) {
-                _recipes.value = Result.Failure(e.localizedMessage ?: "Error fetching recipes")
+                _recipes.value = Result.Failure("Failure fetching recipes, Network Error...")
             }
         }
     }

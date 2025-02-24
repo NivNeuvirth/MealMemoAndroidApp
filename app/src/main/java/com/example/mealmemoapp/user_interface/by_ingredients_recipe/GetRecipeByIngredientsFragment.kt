@@ -55,7 +55,7 @@ class GetRecipeByIngredientsFragment : Fragment(), RecipeAdapter.ItemListener {
                 }
 
                 is Result.Failure -> {
-                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
                 }
             }
         }
