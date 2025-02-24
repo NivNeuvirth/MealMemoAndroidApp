@@ -76,5 +76,6 @@ class MultipleRecipesFragment : Fragment(), RecipeAdapter.ItemListener {
 
     override fun onFavoriteClicked(recipe: Recipe) {
         viewModel.updateFavoriteStatus(recipe)
+        adapter.notifyDataSetChanged()
     }
 }

@@ -26,7 +26,11 @@ class RecipeAdapter(var items:List<Recipe>, val callback: ItemListener):Recycler
         init {
             binding.root.setOnClickListener(this)
             binding.favoriteButton.setOnClickListener{
+                recipe.isFavorite = !recipe.isFavorite
                 callback.onFavoriteClicked(recipe)
+                binding.favoriteButton.setImageResource(
+                    if (recipe.isFavorite) R.drawable.favorite_filled_24px else R.drawable.favorite_24px
+                )
             }
         }
 

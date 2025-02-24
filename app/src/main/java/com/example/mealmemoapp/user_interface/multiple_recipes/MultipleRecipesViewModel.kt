@@ -78,7 +78,7 @@ class MultipleRecipesViewModel @Inject constructor(
     fun updateFavoriteStatus(recipe: Recipe) {
         viewModelScope.launch {
             val updatedRecipe = recipe.copy(isFavorite = !recipe.isFavorite)
-            recipeRepository.updateRecipe(updatedRecipe)
+            recipeRepository.addToFavorites(updatedRecipe)
         }
     }
 }
