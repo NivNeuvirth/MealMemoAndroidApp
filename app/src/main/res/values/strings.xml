@@ -38,4 +38,5 @@
     <string name="servings" translatable="false">servings</string>
     <string name="score" translatable="false">score</string>
     <string name="no_recipe_found_txt">No recipe found</string>
+    <string name="mealmemo" translatable="false">MealMemo</string>
 </resources>
