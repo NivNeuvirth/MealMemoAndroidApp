@@ -48,7 +48,7 @@ object NetworkModule {
     @Named("TranslationApi")
     fun provideTranslationApiRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.AZURE_TRANSLATOR_BASE_URL) // Use the base URL for Azure Translator
+            .baseUrl(Constants.AZURE_TRANSLATOR_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

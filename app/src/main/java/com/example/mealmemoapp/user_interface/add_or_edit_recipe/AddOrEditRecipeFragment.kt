@@ -51,7 +51,7 @@ class AddOrEditRecipeFragment : Fragment() {
 
         val recipe = arguments?.getParcelable<Recipe>("recipe_to_edit")
 
-        Log.d("AddOrEditRecipeFragment", "Received Recipe: $recipe") // Debugging
+        Log.d("AddOrEditRecipeFragment", "Received Recipe: $recipe")
         Log.d("AddOrEditRecipeFragment", "Title: ${recipe?.title}")
         Log.d("AddOrEditRecipeFragment", "Image URI: ${recipe?.image}")
 

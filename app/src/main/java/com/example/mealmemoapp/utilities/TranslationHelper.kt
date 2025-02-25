@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.mealmemoapp.data.remote.api.TranslatorApiService
 import com.example.mealmemoapp.data.models.TranslatorRequest
 import com.example.mealmemoapp.data.models.TranslatorResponse
-import com.example.mealmemoapp.utilities.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -14,7 +13,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 class TranslationHelper @Inject constructor(
-    private val translatorApiService: TranslatorApiService // Inject the TranslatorApiService
+    private val translatorApiService: TranslatorApiService
 ) {
 
     fun translateData(
@@ -23,7 +22,7 @@ class TranslationHelper @Inject constructor(
         ingredients: List<String>,
         onTranslated: (List<String>, List<String>, List<String>) -> Unit
     ) {
-        val deviceLanguage = Locale.getDefault().language // Get device language
+        val deviceLanguage = Locale.getDefault().language
 
         if (deviceLanguage != "iw") {
             onTranslated(names, summaries, ingredients)
@@ -104,14 +103,12 @@ class TranslationHelper @Inject constructor(
     }
 
     suspend fun translateText(text: String, fromLanguage: String, toLanguage: String): String? {
-        // Make the network request on the IO thread
         return withContext(Dispatchers.IO) {
             try {
                 val request = TranslatorRequest(text)
                 val response = translatorApiService.translateText(Constants.AZURE_TRANSLATOR_API, "eastus", listOf(request), "he", "en").execute()
 
                 if (response.isSuccessful) {
-                    // Extract and return the translated text
                     return@withContext response.body()?.firstOrNull()?.translations?.firstOrNull()?.text
                 } else {
                     Log.e("TranslationHelper", "Translation API failed: ${response.errorBody()?.string()}")
