@@ -1,3 +1,42 @@
 <resources>
-    <string name="app_name">MealMemoApp</string>
+    <string name="app_name">MealMemo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="description_title">Description</string>
+    <string name="ingredients_title">Ingredients</string>
+    <string name="ready_in_minutes">Ready in %1$d minutes</string>
+    <string name="score_format">%d Score</string>
+    <string name="servings_format">%d Servings</string>
+    <string name="time_format">%d min</string>
+    <string name="favorites_title">Favorites</string>
+    <string name="nearby_supermarkets_title">Nearby Supermarkets</string>
+    <string name="explore_recipes_title">Explore Recipes</string>
+    <string name="favorite_recipes_title">Favorite Recipes</string>
+    <string name="nearby_supermarkets_home_title">Nearby Supermarkets</string>
+    <string name="get_recipes_by_ingredients_title">Get Recipes By Ingredients</string>
+    <string name="search_recipes">Search Recipes</string>
+    <string name="enter_ingredients_comma_separated">Enter ingredients (comma separated)</string>
+    <string name="add_or_edit_recipe">Add Or Edit Recipe</string>
+    <string name="enter_the_title">Enter the title</string>
+    <string name="enter_the_time_in_minutes">Enter the time in minutes</string>
+    <string name="enter_the_number_of_servings">Enter the number of servings</string>
+    <string name="enter_the_score">Enter the score</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_ingredients">Enter ingredients</string>
+    <string name="add_image">Add image</string>
+    <string name="save">Save</string>
+    <string name="select_minutes">Select Minutes</string>
+    <string name="bottom_sheet_title_txt" translatable="false">bottom_sheet_title</string>
+    <string name="time_txt" translatable="false">time_txt</string>
+    <string name="servings_txt" translatable="false">servings_txt</string>
+    <string name="score_txt" translatable="false">score_txt</string>
+    <string name="this_is_the_bottom_sheet_description" translatable="false">this_is_the_bottom_sheet_description</string>
+    <string name="this_is_the_item_desc" translatable="false">this_is_the_item_desc</string>
+    <string name="edit_icon" translatable="false">edit_icon</string>
+    <string name="main_item_title" translatable="false">Main item title</string>
+    <string name="duration" translatable="false">duration</string>
+    <string name="servings" translatable="false">servings</string>
+    <string name="score" translatable="false">score</string>
+    <string name="no_recipe_found_txt">No recipe found</string>
+    <string name="mealmemo" translatable="false">MealMemo</string>
 </resources>

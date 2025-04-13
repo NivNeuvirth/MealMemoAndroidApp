@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.MealMemoApp" parent="Base.Theme.MealMemoApp" />
+    <style name="CustomToolbarTitle">TitleStyle</style>
 </resources>

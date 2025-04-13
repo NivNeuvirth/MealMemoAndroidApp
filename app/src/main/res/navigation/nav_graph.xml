@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homePageFragment2">
+
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.mealmemoapp.user_interface.multiple_recipes.MultipleRecipesFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_multiple_recipes" >
+        <action
+            android:id="@+id/action_homePageFragment_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailedRecipeFragment"
+        android:name="com.example.mealmemoapp.user_interface.detailed_recipe.DetailedRecipeFragment"
+        android:label="fragment_detailed_recipe"
+        tools:layout="@layout/fragment_detailed_recipe" >
+        <action
+            android:id="@+id/action_detailedRecipeFragment_to_addOrEditRecipeFragment"
+            app:destination="@id/addOrEditRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.example.mealmemoapp.user_interface.favorite_recipes.FavoriteRecipesFragment"
+        android:label="fragment_favorite_recipes"
+        tools:layout="@layout/fragment_favorite_recipes" >
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_addOrEditRecipeFragment"
+            app:destination="@id/addOrEditRecipeFragment" />
+        <action
+            android:id="@+id/action_favoriteRecipesFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrEditRecipeFragment"
+        android:name="com.example.mealmemoapp.user_interface.add_or_edit_recipe.AddOrEditRecipeFragment"
+        android:label="fragment_add_or_edit_recipe"
+        tools:layout="@layout/fragment_add_or_edit_recipe" >
+        <action
+            android:id="@+id/action_addOrEditRecipeFragment_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/storesNearbyFragment"
+        android:name="com.example.mealmemoapp.user_interface.supermarkets_near_by.StoresNearbyFragment"
+        android:label="fragment_stores_nearby_layout"
+        tools:layout="@layout/fragment_stores_nearby_layout" />
+    <fragment
+        android:id="@+id/getRecipeByIngredients"
+        android:name="com.example.mealmemoapp.user_interface.by_ingredients_recipe.GetRecipeByIngredientsFragment"
+        android:label="GetRecipeByIngredients" >
+        <action
+            android:id="@+id/action_getRecipeByIngredients_to_detailedRecipeFragment"
+            app:destination="@id/detailedRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePageFragment2"
+        android:name="com.example.mealmemoapp.user_interface.home_page.HomePageFragment"
+        android:label="HomePageFragment" >
+        <action
+            android:id="@+id/action_homePageFragment2_to_favoriteRecipesFragment"
+            app:destination="@id/favoriteRecipesFragment" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_getRecipeByIngredients"
+            app:destination="@id/getRecipeByIngredients" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_storesNearbyFragment"
+            app:destination="@id/storesNearbyFragment" />
+    </fragment>
+</navigation>
