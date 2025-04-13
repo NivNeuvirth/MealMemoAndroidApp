@@ -18,10 +18,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SPOONACULAR_API_KEY", "\"${project.properties["SPOONACULAR_API_KEY"]}\"")
+        buildConfigField("String", "GOOGLE_MAP_API_KEY", "\"${project.properties["GOOGLE_MAP_API_KEY"]}\"")
+        buildConfigField("String", "AZURE_TRANSLATOR_API", "\"${project.properties["AZURE_TRANSLATOR_API"]}\"")
     }
 
     buildFeatures{
         viewBinding= true
+        buildConfig= true
     }
 
     buildTypes {
